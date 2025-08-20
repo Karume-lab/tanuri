@@ -1,0 +1,9 @@
+{{#if withInterface}}
+interface {{pascalCase name}}{{pascalCase type}}PresenterProps {}
+{{/if}}
+
+const {{pascalCase name}}{{pascalCase type}}Presenter: React.FC{{#if withInterface}}<{{pascalCase name}}{{pascalCase type}}PresenterProps>{{/if}} = ({}) => {
+  return <div></div>;
+};
+
+export default {{pascalCase name}}{{pascalCase type}}Presenter;

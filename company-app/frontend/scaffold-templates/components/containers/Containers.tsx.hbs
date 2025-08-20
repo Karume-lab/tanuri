@@ -1,0 +1,9 @@
+{{#if withInterface}}
+interface {{pascalCase name}}{{pascalCase type}}ContainerProps {}
+{{/if}}
+
+const {{pascalCase name}}{{pascalCase type}}Container: React.FC{{#if withInterface}}<{{pascalCase name}}{{pascalCase type}}ContainerProps>{{/if}} = ({}) => {
+  return <div></div>;
+};
+
+export default {{pascalCase name}}{{pascalCase type}}Container;

@@ -1,0 +1,9 @@
+{{#if withInterface}}
+interface {{pascalCase name}}{{pascalCase type}}LayoutProps {}
+{{/if}}
+
+const {{pascalCase name}}{{pascalCase type}}Layout: React.FC{{#if withInterface}}<{{pascalCase name}}{{pascalCase type}}LayoutProps>{{/if}} = ({}) => {
+  return <div></div>;
+};
+
+export default {{pascalCase name}}{{pascalCase type}}Layout;
