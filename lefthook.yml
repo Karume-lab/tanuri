@@ -1,4 +1,5 @@
 pre-commit:
   commands:
     biome:
-      run: bun run clean {staged_files}
+      run: bun run clean
+      stage_fixed: true
