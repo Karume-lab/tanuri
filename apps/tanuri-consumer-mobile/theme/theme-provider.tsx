@@ -2,11 +2,11 @@ import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider as RNThemeProvider,
-} from '@react-navigation/native';
-import 'react-native-reanimated';
+} from "@react-navigation/native";
+import "react-native-reanimated";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { Colors } from '@/theme/colors';
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Colors } from "@/theme/colors";
 
 type Props = {
   children: React.ReactNode;
@@ -44,7 +44,7 @@ export const ThemeProvider = ({ children }: Props) => {
 
   return (
     <RNThemeProvider
-      value={colorScheme === 'dark' ? customDarkTheme : customLightTheme}
+      value={colorScheme === "dark" ? customDarkTheme : customLightTheme}
     >
       {children}
     </RNThemeProvider>

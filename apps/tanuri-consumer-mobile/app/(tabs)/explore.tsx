@@ -1,12 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { Icon } from '@/components/ui/icon';
-import { ModeToggle } from '@/components/ui/mode-toggle';
-import { ScrollView } from '@/components/ui/scroll-view';
-import { Text } from '@/components/ui/text';
-import { View } from '@/components/ui/view';
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useRouter } from 'expo-router';
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useRouter } from "expo-router";
 import {
   ArrowRight,
   Code,
@@ -19,81 +12,88 @@ import {
   Settings,
   Sparkles,
   Type,
-} from 'lucide-react-native';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+} from "lucide-react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import { ScrollView } from "@/components/ui/scroll-view";
+import { Text } from "@/components/ui/text";
+import { View } from "@/components/ui/view";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export default function ExploreScreen() {
   const router = useRouter();
   const bottom = useBottomTabBarHeight();
 
-  const cardColor = useThemeColor({}, 'card');
-  const borderColor = useThemeColor({}, 'border');
-  const primaryColor = useThemeColor({}, 'primary');
+  const cardColor = useThemeColor({}, "card");
+  const borderColor = useThemeColor({}, "border");
+  const primaryColor = useThemeColor({}, "primary");
 
   const components = [
     {
-      id: 'button',
-      name: 'Button',
-      description: 'Interactive button with variants and animations',
+      id: "button",
+      name: "Button",
+      description: "Interactive button with variants and animations",
       icon: Mouse,
-      category: 'Interactive',
+      category: "Interactive",
     },
     {
-      id: 'text',
-      name: 'Text',
-      description: 'Typography component with variant support',
+      id: "text",
+      name: "Text",
+      description: "Typography component with variant support",
       icon: Type,
-      category: 'Typography',
+      category: "Typography",
     },
     {
-      id: 'icon',
-      name: 'Icon',
-      description: 'Lucide icons with theme support',
+      id: "icon",
+      name: "Icon",
+      description: "Lucide icons with theme support",
       icon: Sparkles,
-      category: 'Visual',
+      category: "Visual",
     },
     {
-      id: 'link',
-      name: 'Link',
-      description: 'Navigation links with external support',
+      id: "link",
+      name: "Link",
+      description: "Navigation links with external support",
       icon: LinkIcon,
-      category: 'Navigation',
+      category: "Navigation",
     },
     {
-      id: 'spinner',
-      name: 'Spinner',
-      description: 'Loading indicators with multiple variants',
+      id: "spinner",
+      name: "Spinner",
+      description: "Loading indicators with multiple variants",
       icon: Loader,
-      category: 'Feedback',
+      category: "Feedback",
     },
     {
-      id: 'mode-toggle',
-      name: 'Mode Toggle',
-      description: 'Theme switcher with smooth animations',
+      id: "mode-toggle",
+      name: "Mode Toggle",
+      description: "Theme switcher with smooth animations",
       icon: Moon,
-      category: 'Interactive',
+      category: "Interactive",
     },
   ];
 
   const features = [
     {
-      title: 'Live Preview',
-      description: 'See components in action with real-time demos',
+      title: "Live Preview",
+      description: "See components in action with real-time demos",
       icon: Eye,
     },
     {
-      title: 'Code Examples',
-      description: 'Copy-paste ready code snippets',
+      title: "Code Examples",
+      description: "Copy-paste ready code snippets",
       icon: Code,
     },
     {
-      title: 'Customizable',
-      description: 'Easy to customize with your brand colors',
+      title: "Customizable",
+      description: "Easy to customize with your brand colors",
       icon: Palette,
     },
     {
-      title: 'Accessible',
-      description: 'Built with accessibility in mind',
+      title: "Accessible",
+      description: "Built with accessibility in mind",
       icon: Settings,
     },
   ];
@@ -107,7 +107,7 @@ export default function ExploreScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerContent}>
-          <Text variant='heading'>Components</Text>
+          <Text variant="heading">Components</Text>
 
           <ModeToggle />
         </View>
@@ -125,7 +125,7 @@ export default function ExploreScreen() {
               ]}
               onPress={() =>
                 router.push(
-                  `https://ui.ahmedbna.com/docs/components/${component.id}`
+                  `https://ui.ahmedbna.com/docs/components/${component.id}`,
                 )
               }
             >
@@ -134,16 +134,16 @@ export default function ExploreScreen() {
                   <Icon name={component.icon} size={24} color={primaryColor} />
                 </View>
                 <View style={styles.componentInfo}>
-                  <Text variant='subtitle' style={styles.componentName}>
+                  <Text variant="subtitle" style={styles.componentName}>
                     {component.name}
                   </Text>
-                  <Text variant='caption' style={styles.componentCategory}>
+                  <Text variant="caption" style={styles.componentCategory}>
                     {component.category}
                   </Text>
                 </View>
-                <Button variant='ghost' size='icon' icon={ArrowRight} />
+                <Button variant="ghost" size="icon" icon={ArrowRight} />
               </View>
-              <Text variant='caption' style={styles.componentDescription}>
+              <Text variant="caption" style={styles.componentDescription}>
                 {component.description}
               </Text>
             </TouchableOpacity>
@@ -153,13 +153,13 @@ export default function ExploreScreen() {
 
       {/* Features Overview */}
       <View style={styles.featuresSection}>
-        <Text variant='title' style={styles.sectionTitle}>
+        <Text variant="title" style={styles.sectionTitle}>
           What You Get
         </Text>
         <View style={styles.featuresGrid}>
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <View
-              key={index}
+              key={feature.title}
               style={[
                 styles.featureItem,
                 { backgroundColor: cardColor, borderColor },
@@ -167,10 +167,10 @@ export default function ExploreScreen() {
             >
               <Icon name={feature.icon} size={20} color={primaryColor} />
               <View style={styles.featureContent}>
-                <Text variant='body' style={styles.featureTitle}>
+                <Text variant="body" style={styles.featureTitle}>
                   {feature.title}
                 </Text>
-                <Text variant='caption' style={styles.featureDescription}>
+                <Text variant="caption" style={styles.featureDescription}>
                   {feature.description}
                 </Text>
               </View>
@@ -195,16 +195,16 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   headerLeft: {
     flex: 1,
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   headerSubtitle: {
     marginTop: 4,
@@ -218,20 +218,20 @@ const styles = StyleSheet.create({
     padding: 24,
     borderRadius: 16,
     borderWidth: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   demoTitle: {
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 8,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   demoDescription: {
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 20,
     opacity: 0.7,
   },
   demoButtonsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginBottom: 20,
   },
@@ -239,25 +239,25 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.05 }],
   },
   demoSpinners: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 16,
-    alignItems: 'center',
+    alignItems: "center",
   },
   featuresSection: {
     paddingHorizontal: 20,
     marginBottom: 40,
   },
   sectionTitle: {
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 24,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   featuresGrid: {
     gap: 12,
   },
   featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   featureTitle: {
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 4,
   },
   featureDescription: {
@@ -287,23 +287,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   componentHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   componentIcon: {
     width: 40,
     height: 40,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: 12,
   },
   componentInfo: {
     flex: 1,
   },
   componentName: {
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 2,
   },
   componentCategory: {
@@ -322,21 +322,21 @@ const styles = StyleSheet.create({
     padding: 24,
     borderRadius: 16,
     borderWidth: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   quickStartTitle: {
-    textAlign: 'center',
-    fontWeight: '600',
+    textAlign: "center",
+    fontWeight: "600",
     marginBottom: 8,
   },
   quickStartDescription: {
-    textAlign: 'center',
+    textAlign: "center",
     opacity: 0.7,
     marginBottom: 20,
     lineHeight: 20,
   },
   quickStartButtons: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
   },
   quickStartButton: {
@@ -350,9 +350,9 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   linkCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
@@ -360,10 +360,10 @@ const styles = StyleSheet.create({
   footer: {
     paddingHorizontal: 20,
     paddingVertical: 40,
-    alignItems: 'center',
+    alignItems: "center",
   },
   footerText: {
-    textAlign: 'center',
+    textAlign: "center",
     opacity: 0.6,
   },
 });
