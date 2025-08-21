@@ -15,7 +15,9 @@
     "format": "biome format",
     "check": "biome check",
     "clean": "biome check --write",
-    "doctor": "bunx tsc -p tsconfig.base.json --noEmit"
+    "doctor": "bunx tsc -p tsconfig.base.json --noEmit",
+    "lefthook": "lefthook",
+    "postinstall": "lefthook install"
   },
   "dependencies": {
     "react": "19.0.0",
@@ -25,6 +27,7 @@
     "@biomejs/biome": "2.2.0",
     "@types/react": "~19.0.10",
     "@types/react-dom": "19.0.1",
+    "lefthook": "^1.12.3",
     "plop": "^4.0.1",
     "typescript": "5.8.3"
   }
