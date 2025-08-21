@@ -1,0 +1,27 @@
+# All
+.git
+# Ignore all .env files
+.env*
+
+# Don't ignore these specific .env files
+!.env.development
+!.env.dist
+
+# JS
+node_modules
+.expo
+expo-env.d.ts
+*.tsbuildinfo 
+
+# Next
+.next
+next-env.d.ts
+
+# Expo
+android/
+ios/
+
+# Django
+venv
+__pycache__
+db.*
