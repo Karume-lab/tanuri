@@ -2,7 +2,7 @@ import type { NodePlopAPI } from "node-plop";
 import {
   getComponentGeneratorConfig,
   getFeatureGeneratorConfig,
-} from "./plop-config";
+} from "./plop-config/index.ts";
 
 const Plopper = (plop: NodePlopAPI) => {
   plop.setGenerator("component", getComponentGeneratorConfig(plop));

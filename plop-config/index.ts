@@ -127,43 +127,43 @@ const getFeatureGeneratorConfig = () => ({
     const files = [
       {
         path: path.join(featureRoot, "api/index.ts"),
-        template: "// API hooks for {{feature}}",
+        template: "// API hooks for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "components/index.ts"),
-        template: "// Components for {{feature}}",
+        template: "// Components for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "components/containers/index.ts"),
-        template: "// Containers  for {{feature}}",
+        template: "// Containers  for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "components/layouts/index.ts"),
-        template: "// Layouts  for {{feature}}",
+        template: "// Layouts  for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "components/presenters/index.ts"),
-        template: "// Presenters for {{feature}}",
+        template: "// Presenters for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "hooks/index.ts"),
-        template: "// Hooks for {{feature}}",
+        template: "// Hooks for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "styles/index.css"),
-        template: "/* Styles for {{feature}} */",
+        template: "/* Styles for {{pascalCase feature}} */",
       },
       {
         path: path.join(featureRoot, "types/index.ts"),
-        template: "// Types for {{feature}}",
+        template: "// Types for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "utils/index.ts"),
-        template: "// Utils for {{feature}}",
+        template: "// Utils for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "validations/index.ts"),
-        template: "// Validations for {{feature}}",
+        template: "// Validations for {{pascalCase feature}}",
       },
     ];
 
