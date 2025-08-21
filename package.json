@@ -4,11 +4,13 @@
   "workspaces": [
     "apps/*"
   ],
+  "type": "module",
   "scripts": {
     "dev:web": "bun run --cwd apps/tanuri-company-web dev",
     "dev:mobile": "bun run --cwd apps/tanuri-consumer-mobile start",
     "dev:backend": "source backend/venv/bin/activate && python backend/manage.py runserver",
     "dev": "bun run -p dev:web dev:mobile dev:backend",
+    "scaffold": "plop",
     "lint": "biome check",
     "format": "biome format --write",
     "biome-apply": "biome check --write",
@@ -23,6 +25,7 @@
     "@biomejs/biome": "2.2.0",
     "@types/react": "~19.0.10",
     "@types/react-dom": "19.0.1",
+    "plop": "^4.0.1",
     "typescript": "5.8.3"
   }
 }
