@@ -2,12 +2,15 @@ import type { NodePlopAPI } from "node-plop";
 import {
   getComponentGeneratorConfig,
   getFeatureGeneratorConfig,
-} from "./plop-config/index.ts";
+  getPageGeneratorConfig,
+  getScreenGeneratorConfig,
+} from "./plop-config/generators.ts";
 
-const Plopper = (plop: NodePlopAPI) => {
+const plopper = (plop: NodePlopAPI) => {
   plop.setGenerator("component", getComponentGeneratorConfig(plop));
-
   plop.setGenerator("feature", getFeatureGeneratorConfig());
+  plop.setGenerator("page", getPageGeneratorConfig());
+  plop.setGenerator("screen", getScreenGeneratorConfig());
 };
 
-export default Plopper;
+export default plopper;

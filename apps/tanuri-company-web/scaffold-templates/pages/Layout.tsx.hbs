@@ -1,0 +1,15 @@
+import type React from "react";
+
+interface {{pascalCase name}}{{pascalCase type}}Props extends Readonly<{
+  children: React.ReactNode;
+}> {}
+
+const {{pascalCase name}}{{pascalCase type}}: React.FC<{{pascalCase name}}{{pascalCase type}}Props> = ({ children }) => {
+  return (
+    <div>
+      {children}
+    </div>
+  );
+};
+
+export default {{pascalCase name}}{{pascalCase type}};
