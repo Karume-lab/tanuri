@@ -8,7 +8,7 @@ import {
 
 const plopper = (plop: NodePlopAPI) => {
   plop.setGenerator("component", getComponentGeneratorConfig(plop));
-  plop.setGenerator("feature", getFeatureGeneratorConfig());
+  plop.setGenerator("feature", getFeatureGeneratorConfig(plop));
   plop.setGenerator("page", getPageGeneratorConfig());
   plop.setGenerator("screen", getScreenGeneratorConfig());
 };

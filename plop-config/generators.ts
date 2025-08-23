@@ -98,7 +98,7 @@ const getComponentGeneratorConfig = (plop: NodePlopAPI) => ({
   },
 });
 
-const getFeatureGeneratorConfig = () => ({
+const getFeatureGeneratorConfig = (plop: NodePlopAPI) => ({
   description: "Generate a full feature folder under src/features/",
   prompts: [
     {
@@ -120,13 +120,14 @@ const getFeatureGeneratorConfig = () => ({
     if (!answers) return [];
 
     const appRoot = path.resolve(__dirname, "apps", answers.app);
-    const featureRoot = path.join(appRoot, "src", "features", answers.feature);
+    const featureRoot = path.join(
+      appRoot,
+      "src",
+      "features",
+      plop.getHelper("lowerCase")(answers.feature),
+    );
 
     const files = [
-      {
-        path: path.join(featureRoot, "api/index.ts"),
-        template: "// API hooks for {{pascalCase feature}}",
-      },
       {
         path: path.join(featureRoot, "components/index.ts"),
         template: "// Components for {{pascalCase feature}}",
@@ -146,6 +147,14 @@ const getFeatureGeneratorConfig = () => ({
       {
         path: path.join(featureRoot, "hooks/index.ts"),
         template: "// Hooks for {{pascalCase feature}}",
+      },
+      {
+        path: path.join(featureRoot, "hooks/api/mutations.ts"),
+        template: "// API mutations for {{pascalCase feature}}",
+      },
+      {
+        path: path.join(featureRoot, "hooks/api/queries.ts"),
+        template: "// API queries for {{pascalCase feature}}",
       },
       {
         path: path.join(featureRoot, "styles/index.css"),
