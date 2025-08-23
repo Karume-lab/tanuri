@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "apps/tanuri-consumer-mobile"
+    },
+    {
+      "path": "apps/tanuri-website"
+    },
+    {
+      "path": "apps/tanuri-company-web"
+    },
+    {
+      "path": "backend"
+    }
+  ]
+}
