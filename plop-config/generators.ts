@@ -1,12 +1,14 @@
 import { exec } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { NodePlopAPI } from "node-plop";
+import type { NodePlopAPI, PlopGeneratorConfig } from "node-plop";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.join(path.dirname(__filename), "..");
 
-const getComponentGeneratorConfig = (plop: NodePlopAPI) => ({
+const getComponentGeneratorConfig = (
+  plop: NodePlopAPI,
+): PlopGeneratorConfig => ({
   description:
     "Generate a new React component in containers, layouts, or presenters for web or mobile",
   prompts: [
@@ -98,7 +100,7 @@ const getComponentGeneratorConfig = (plop: NodePlopAPI) => ({
   },
 });
 
-const getFeatureGeneratorConfig = (plop: NodePlopAPI) => ({
+const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
   description: "Generate a full feature folder under src/features/",
   prompts: [
     {
@@ -183,9 +185,113 @@ const getFeatureGeneratorConfig = (plop: NodePlopAPI) => ({
   },
 });
 
-const getScreenGeneratorConfig = () => ({});
+const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
+  description: "Generate a new Next.js App Router page",
+  prompts: [
+    {
+      type: "list",
+      name: "access",
+      message: "Is this page protected or public?",
+      choices: [
+        { name: "Protected", value: "protected" },
+        { name: "Public", value: "public" },
+      ],
+    },
+    {
+      type: "input",
+      name: "path",
+      message: "What is the route path? (e.g. dashboard/settings)",
+    },
+    {
+      type: "input",
+      name: "name",
+      message: "What is the name of your page? (singular)",
+    },
+    {
+      type: "confirm",
+      name: "withLayout",
+      message: "Do you want to create a layout for this page folder?",
+      default: false,
+    },
+    {
+      type: "confirm",
+      name: "withDynamicRoute",
+      message: "Is this a dynamic route?",
+      default: false,
+    },
+  ],
+  actions: (answers) => {
+    if (!answers) return [];
 
-const getPageGeneratorConfig = () => ({});
+    const {
+      access,
+      path: routePath,
+      name,
+      withLayout,
+      withDynamicRoute,
+    } = answers;
+
+    console.log(__dirname);
+
+    const appRoot = path.join(__dirname, "apps/tanuri-company-web");
+    const appDir = path.join(appRoot, "src/app");
+    const templatesRoot = path.join(appRoot, "scaffold-templates/pages");
+
+    const segmentFolder = `(pages)/(${access})/${routePath}`;
+    const listPageFile = path.join(appDir, segmentFolder, "page.tsx");
+
+    const actions: PlopGeneratorConfig["actions"] = [
+      {
+        type: "add",
+        path: listPageFile,
+        templateFile: path.join(templatesRoot, "Component.tsx.hbs"),
+        data: {
+          name: plop.getHelper("pascalCase")(name),
+          type: "Page",
+          withInterface: false,
+        },
+      },
+    ];
+
+    if (withLayout) {
+      actions.push({
+        type: "add",
+        path: path.join(appDir, segmentFolder, "layout.tsx"),
+        templateFile: path.join(templatesRoot, "Layout.tsx.hbs"),
+        data: {
+          name: plop.getHelper("pascalCase")(name),
+          type: "Layout",
+          withInterface: false, // no interface for layout
+        },
+      });
+    }
+
+    if (withDynamicRoute) {
+      const detailFolder = path.join(appDir, segmentFolder, "[id]");
+      const detailPageFile = path.join(detailFolder, "page.tsx");
+
+      actions.push({
+        type: "add",
+        path: detailPageFile,
+        templateFile: path.join(templatesRoot, "Component.tsx.hbs"),
+        data: {
+          name: `${plop.getHelper("pascalCase")(name)}Detail`,
+          type: "Page",
+          withInterface: false,
+        },
+      });
+    }
+
+    actions.push(() => {
+      exec(`code "${listPageFile}"`);
+      return `Opened ${listPageFile} in VS Code`;
+    });
+
+    return actions;
+  },
+});
+
+const getScreenGeneratorConfig = () => ({});
 
 export {
   getComponentGeneratorConfig,
