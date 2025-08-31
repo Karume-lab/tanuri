@@ -1,5 +1,4 @@
 import { Mail } from "lucide-react-native";
-import React from "react";
 import { BottomSheet, useBottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
