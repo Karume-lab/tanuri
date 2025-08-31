@@ -2,9 +2,19 @@ import { exec } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { NodePlopAPI, PlopGeneratorConfig } from "node-plop";
+import pluralize from "pluralize";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.join(path.dirname(__filename), "..");
+
+/* 
+TODO:
+- start plopping for mobile
+- move the helpers to the hbs files where possible
+- move each function to its own file
+- allow opting out of some files while scaffolding features
+- allow nested paths when adding a route
+*/
 
 const getComponentGeneratorConfig = (
   plop: NodePlopAPI,
@@ -196,11 +206,7 @@ const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
         { name: "Protected", value: "protected" },
         { name: "Public", value: "public" },
       ],
-    },
-    {
-      type: "input",
-      name: "path",
-      message: "What is the route path? (e.g. dashboard/settings)",
+      default: "protected",
     },
     {
       type: "input",
@@ -210,45 +216,38 @@ const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
     {
       type: "confirm",
       name: "withLayout",
-      message: "Do you want to create a layout for this page folder?",
+      message: "Add a layout for this page folder?",
       default: false,
     },
     {
       type: "confirm",
       name: "withDynamicRoute",
-      message: "Is this a dynamic route?",
+      message: "Add a dynamic route?",
       default: false,
     },
   ],
   actions: (answers) => {
     if (!answers) return [];
 
-    const {
-      access,
-      path: routePath,
-      name,
-      withLayout,
-      withDynamicRoute,
-    } = answers;
-
-    console.log(__dirname);
+    const { access, name, withLayout, withDynamicRoute } = answers;
 
     const appRoot = path.join(__dirname, "apps/tanuri-company-web");
     const appDir = path.join(appRoot, "src/app");
     const templatesRoot = path.join(appRoot, "scaffold-templates/pages");
 
-    const segmentFolder = `(pages)/(${access})/${routePath}`;
+    const pluralName = pluralize(name);
+    const segmentFolder = `(pages)/(${access})/${plop.getHelper("kebabCase")(
+      pluralName,
+    )}`;
     const listPageFile = path.join(appDir, segmentFolder, "page.tsx");
 
     const actions: PlopGeneratorConfig["actions"] = [
       {
         type: "add",
         path: listPageFile,
-        templateFile: path.join(templatesRoot, "Component.tsx.hbs"),
+        templateFile: path.join(templatesRoot, "Page.tsx.hbs"),
         data: {
-          name: plop.getHelper("pascalCase")(name),
-          type: "Page",
-          withInterface: false,
+          pageName: pluralName,
         },
       },
     ];
@@ -259,9 +258,7 @@ const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
         path: path.join(appDir, segmentFolder, "layout.tsx"),
         templateFile: path.join(templatesRoot, "Layout.tsx.hbs"),
         data: {
-          name: plop.getHelper("pascalCase")(name),
-          type: "Layout",
-          withInterface: false, // no interface for layout
+          name: `${plop.getHelper("pascalCase")(pluralName)}`,
         },
       });
     }
@@ -273,29 +270,33 @@ const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
       actions.push({
         type: "add",
         path: detailPageFile,
-        templateFile: path.join(templatesRoot, "Component.tsx.hbs"),
+        templateFile: path.join(templatesRoot, "Page.tsx.hbs"),
         data: {
-          name: `${plop.getHelper("pascalCase")(name)}Detail`,
-          type: "Page",
-          withInterface: false,
+          pageName: `${plop.getHelper("pascalCase")(name)}`,
         },
       });
     }
 
     actions.push(() => {
-      exec(`code "${listPageFile}"`);
-      return `Opened ${listPageFile} in VS Code`;
+      const filesToOpen = [listPageFile];
+      if (withDynamicRoute) {
+        filesToOpen.push(path.join(appDir, segmentFolder, "[id]/page.tsx"));
+      }
+      if (withLayout) {
+        filesToOpen.push(path.join(appDir, segmentFolder, "layout.tsx"));
+      }
+      filesToOpen.forEach((file) => {
+        exec(`code "${file}"`);
+      });
+      return `Opened generated files in VS Code`;
     });
 
     return actions;
   },
 });
 
-const getScreenGeneratorConfig = () => ({});
-
 export {
   getComponentGeneratorConfig,
   getFeatureGeneratorConfig,
   getPageGeneratorConfig,
-  getScreenGeneratorConfig,
 };

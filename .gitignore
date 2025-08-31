@@ -7,6 +7,8 @@
 !.env.development
 !.env.dist
 
+.fuse*
+
 # JS
 node_modules
 .expo

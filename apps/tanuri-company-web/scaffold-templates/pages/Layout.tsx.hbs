@@ -1,10 +1,10 @@
 import type React from "react";
 
-interface {{pascalCase name}}{{pascalCase type}}Props extends Readonly<{
+interface {{pascalCase name}}LayoutProps extends Readonly<{
   children: React.ReactNode;
 }> {}
 
-const {{pascalCase name}}{{pascalCase type}}: React.FC<{{pascalCase name}}{{pascalCase type}}Props> = ({ children }) => {
+const {{pascalCase name}}Layout: React.FC<{{pascalCase name}}LayoutProps> = ({ children }) => {
   return (
     <div>
       {children}
@@ -12,4 +12,4 @@ const {{pascalCase name}}{{pascalCase type}}: React.FC<{{pascalCase name}}{{pasc
   );
 };
 
-export default {{pascalCase name}}{{pascalCase type}};
+export default {{pascalCase name}}Layout;
