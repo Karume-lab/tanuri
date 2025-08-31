@@ -2,12 +2,12 @@ import { PlatformPressable } from "@react-navigation/elements";
 import { BlurView } from "expo-blur";
 import * as Haptics from "expo-haptics";
 import { Tabs } from "expo-router";
-import { Home, Stars } from "lucide-react-native";
+import { Home, ShoppingBag } from "lucide-react-native";
 import { Platform, StyleSheet } from "react-native";
 import { Icon } from "@/components/ui/icon";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-export default function TabLayout() {
+const TabsLayout = () => {
   const primary = useThemeColor({}, "primary");
 
   return (
@@ -51,7 +51,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
@@ -61,14 +61,16 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="explore"
+        name="products"
         options={{
-          title: "Explore",
+          title: "Products",
           tabBarIcon: ({ color }) => (
-            <Icon name={Stars} size={24} color={color} />
+            <Icon name={ShoppingBag} size={24} color={color} />
           ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabsLayout;

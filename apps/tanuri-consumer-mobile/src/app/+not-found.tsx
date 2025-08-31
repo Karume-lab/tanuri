@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 
-export default function NotFoundScreen() {
+const NotFoundScreen = () => {
   return (
     <>
       <Stack.Screen options={{ title: "Oops!" }} />
@@ -21,4 +21,6 @@ export default function NotFoundScreen() {
       </View>
     </>
   );
-}
+};
+
+export default NotFoundScreen;

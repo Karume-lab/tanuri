@@ -1,0 +1,11 @@
+import type React from "react";
+
+{{#if withInterface}}
+interface {{pascalCase name}}{{pascalCase type}}Props {}
+{{/if}}
+
+const {{pascalCase name}}{{pascalCase type}}: React.FC{{#if withInterface}}<{{pascalCase name}}{{pascalCase type}}Props>{{/if}} = ({{#if withInterface}}{}{{/if}}) => {
+  return <></>;
+};
+
+export default {{pascalCase name}}{{pascalCase type}};

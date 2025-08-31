@@ -1,6 +1,6 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { LucideProps } from 'lucide-react-native';
-import React from 'react';
+import type { LucideProps } from "lucide-react-native";
+import type React from "react";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export type Props = LucideProps & {
   lightColor?: string;
@@ -19,7 +19,7 @@ export function Icon({
 }: Props) {
   const themedColor = useThemeColor(
     { light: lightColor, dark: darkColor },
-    'icon'
+    "icon",
   );
 
   // Use provided color prop if available, otherwise use themed color
@@ -30,7 +30,7 @@ export function Icon({
       color={iconColor}
       size={size}
       strokeWidth={strokeWidth}
-      strokeLinecap='round'
+      strokeLinecap="round"
       {...rest}
     />
   );
