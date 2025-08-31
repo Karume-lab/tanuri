@@ -2,6 +2,7 @@
 .git
 # Ignore all .env files
 .env*
+misc
 
 # Don't ignore these specific .env files
 !.env.development
