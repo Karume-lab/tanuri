@@ -1,5 +1,5 @@
 import { Lock, Mail } from "lucide-react-native";
-import ForgotPasswordBottomSheet from "@/components/auth/ForgotPasswordBottomSheet";
+import { ForgotPasswordBottomSheet } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
 import { Input } from "@/components/ui/input";
@@ -42,7 +42,7 @@ const SignInScreen = () => {
       <View style={{ display: "flex", gap: 12 }}>
         <Input label="Email" placeholder="Enter your email" icon={Mail} />
         <Input label="Password" placeholder="Enter your password" icon={Lock} />
-        <Link href={"/(screens)/(protected)/(tabs)"} asChild>
+        <Link href={"/(screens)/(protected)/(tabs)/home"} asChild>
           <Button>Sign in</Button>
         </Link>
         <ForgotPasswordBottomSheet />
