@@ -7,15 +7,6 @@ import pluralize from "pluralize";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.join(path.dirname(__filename), "..");
 
-/* 
-TODO:
-- start plopping for mobile
-- move the helpers to the hbs files where possible
-- move each function to its own file
-- allow opting out of some files while scaffolding features
-- allow nested paths when adding a route
-*/
-
 const getComponentGeneratorConfig = (
   plop: NodePlopAPI,
 ): PlopGeneratorConfig => ({
@@ -138,14 +129,12 @@ const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
           "validations/index.ts",
         ];
 
-        // First option behaves as "select all"
         return [
           { name: "[Select/Deselect All]", value: "*", checked: true },
           ...files.map((file) => ({ name: file, value: file, checked: true })),
         ];
       },
       filter: (input: string[]) => {
-        // If "*" is selected, select everything
         if (input.includes("*")) {
           return [
             "components/index.ts",
