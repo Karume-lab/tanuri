@@ -1,10 +1,11 @@
 import { Mail } from "lucide-react-native";
+import type React from "react";
 import { BottomSheet, useBottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { View } from "@/components/ui/view";
 
-const ForgotPasswordBottomSheet = () => {
+const ForgotPasswordBottomSheet: React.FC = () => {
   const { isVisible, open, close } = useBottomSheet();
 
   return (
