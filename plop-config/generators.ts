@@ -58,10 +58,7 @@ const getComponentGeneratorConfig = (
 
     const appRoot = path.resolve(__dirname, "apps", answers.app);
 
-    const componentsPath =
-      answers.app === "tanuri-company-web"
-        ? path.join(appRoot, "src/components")
-        : path.join(appRoot, "components");
+    const componentsPath = path.join(appRoot, "src/components");
 
     const templateRoot = path.join(appRoot, "scaffold-templates/components");
     const indexFile = path.join(componentsPath, "index.ts");
@@ -93,13 +90,8 @@ const getComponentGeneratorConfig = (
         const pascalName = plop.getHelper("pascalCase")(answers.name);
         const pascalType = plop.getHelper("pascalCase")(answers.type);
 
-        const baseComponentsPath =
-          answers.app === "tanuri-company-web"
-            ? path.join(appRoot, "src/components")
-            : path.join(appRoot, "components");
-
         const filePath = path.join(
-          baseComponentsPath,
+          componentsPath,
           `${folder}/${pascalName}${pascalType}.tsx`,
         );
 
