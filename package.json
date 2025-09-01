@@ -7,15 +7,13 @@
   "type": "module",
   "scripts": {
     "dev:web": "bun run --cwd apps/tanuri-company-web dev",
-    "dev:mobile": "bun run --cwd apps/tanuri-consumer-mobile start",
+    "dev:mobile": "bun run --cwd apps/tanuri-consumer-mobile dev",
     "dev:backend": "source backend/venv/bin/activate && python backend/manage.py runserver",
-    "dev": "bun run -p dev:web dev:mobile dev:backend",
     "scaffold": "plop",
     "lint": "biome check",
     "format": "biome format",
     "check": "biome check",
     "clean": "biome check --write",
-    "doctor": "bunx expo-doctor && bunx tsc -p tsconfig.base.json --noEmit",
     "lefthook": "lefthook",
     "postinstall": "lefthook install"
   },
