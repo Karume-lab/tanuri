@@ -119,6 +119,51 @@ const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
       name: "feature",
       message: "What is the feature name?",
     },
+    {
+      type: "checkbox",
+      name: "parts",
+      message: "Which parts do you want to generate?",
+      choices: () => {
+        const files = [
+          "components/index.ts",
+          "components/containers/index.ts",
+          "components/layouts/index.ts",
+          "components/presenters/index.ts",
+          "hooks/index.ts",
+          "hooks/api/mutations.ts",
+          "hooks/api/queries.ts",
+          "styles/index.css",
+          "types/index.ts",
+          "utils/index.ts",
+          "validations/index.ts",
+        ];
+
+        // First option behaves as "select all"
+        return [
+          { name: "[Select/Deselect All]", value: "*", checked: true },
+          ...files.map((file) => ({ name: file, value: file, checked: true })),
+        ];
+      },
+      filter: (input: string[]) => {
+        // If "*" is selected, select everything
+        if (input.includes("*")) {
+          return [
+            "components/index.ts",
+            "components/containers/index.ts",
+            "components/layouts/index.ts",
+            "components/presenters/index.ts",
+            "hooks/index.ts",
+            "hooks/api/mutations.ts",
+            "hooks/api/queries.ts",
+            "styles/index.css",
+            "types/index.ts",
+            "utils/index.ts",
+            "validations/index.ts",
+          ];
+        }
+        return input;
+      },
+    },
   ],
   actions: (answers) => {
     if (!answers) return [];
@@ -131,57 +176,26 @@ const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
       plop.getHelper("lowerCase")(answers.feature),
     );
 
-    const files = [
-      {
-        path: path.join(featureRoot, "components/index.ts"),
-        template: "// Components for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "components/containers/index.ts"),
-        template: "// Containers  for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "components/layouts/index.ts"),
-        template: "// Layouts  for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "components/presenters/index.ts"),
-        template: "// Presenters for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "hooks/index.ts"),
-        template: "// Hooks for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "hooks/api/mutations.ts"),
-        template: "// API mutations for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "hooks/api/queries.ts"),
-        template: "// API queries for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "styles/index.css"),
-        template: "/* Styles for {{pascalCase feature}} */",
-      },
-      {
-        path: path.join(featureRoot, "types/index.ts"),
-        template: "// Types for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "utils/index.ts"),
-        template: "// Utils for {{pascalCase feature}}",
-      },
-      {
-        path: path.join(featureRoot, "validations/index.ts"),
-        template: "// Validations for {{pascalCase feature}}",
-      },
-    ];
+    const templates: Record<string, string> = {
+      "components/index.ts": "// Components for {{pascalCase feature}}",
+      "components/containers/index.ts":
+        "// Containers for {{pascalCase feature}}",
+      "components/layouts/index.ts": "// Layouts for {{pascalCase feature}}",
+      "components/presenters/index.ts":
+        "// Presenters for {{pascalCase feature}}",
+      "hooks/index.ts": "// Hooks for {{pascalCase feature}}",
+      "hooks/api/mutations.ts": "// API mutations for {{pascalCase feature}}",
+      "hooks/api/queries.ts": "// API queries for {{pascalCase feature}}",
+      "styles/index.css": "/* Styles for {{pascalCase feature}} */",
+      "types/index.ts": "// Types for {{pascalCase feature}}",
+      "utils/index.ts": "// Utils for {{pascalCase feature}}",
+      "validations/index.ts": "// Validations for {{pascalCase feature}}",
+    };
 
-    return files.map((file) => ({
+    return answers.parts.map((file) => ({
       type: "add",
-      path: file.path,
-      template: file.template,
+      path: path.join(featureRoot, file),
+      template: templates[file],
       skipIfExists: true,
     }));
   },
