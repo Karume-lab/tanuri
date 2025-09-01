@@ -192,7 +192,7 @@ const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
       "validations/index.ts": "// Validations for {{pascalCase feature}}",
     };
 
-    return answers.parts.map((file) => ({
+    return answers.parts.map((file: string) => ({
       type: "add",
       path: path.join(featureRoot, file),
       template: templates[file],
