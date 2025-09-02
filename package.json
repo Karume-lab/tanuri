@@ -6,9 +6,6 @@
   ],
   "type": "module",
   "scripts": {
-    "dev:web": "bun run --cwd apps/tanuri-company-web dev",
-    "dev:mobile": "bun run --cwd apps/tanuri-consumer-mobile dev",
-    "dev:backend": "source backend/venv/bin/activate && python backend/manage.py runserver",
     "scaffold": "plop",
     "lint": "biome check",
     "format": "biome format",
