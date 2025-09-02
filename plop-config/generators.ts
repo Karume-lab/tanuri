@@ -7,7 +7,7 @@ import pluralize from "pluralize";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.join(path.dirname(__filename), "..");
 
-const getComponentGeneratorConfig = (
+export const getComponentGeneratorConfig = (
   plop: NodePlopAPI,
 ): PlopGeneratorConfig => ({
   description:
@@ -93,7 +93,9 @@ const getComponentGeneratorConfig = (
   },
 });
 
-const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
+export const getFeatureGeneratorConfig = (
+  plop: NodePlopAPI,
+): PlopGeneratorConfig => ({
   description: "Generate a full feature folder under src/features/",
   prompts: [
     {
@@ -190,7 +192,9 @@ const getFeatureGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
   },
 });
 
-const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
+export const getPageGeneratorConfig = (
+  plop: NodePlopAPI,
+): PlopGeneratorConfig => ({
   description: "Generate a new Next.js App Router page",
   prompts: [
     {
@@ -289,9 +293,3 @@ const getPageGeneratorConfig = (plop: NodePlopAPI): PlopGeneratorConfig => ({
     return actions;
   },
 });
-
-export {
-  getComponentGeneratorConfig,
-  getFeatureGeneratorConfig,
-  getPageGeneratorConfig,
-};

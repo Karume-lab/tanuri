@@ -1,13 +1,33 @@
-import { Lock, Mail } from "lucide-react-native";
-import { ForgotPasswordBottomSheet } from "@/components";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail } from "lucide-react-native";
+import { Controller, useForm } from "react-hook-form";
+import { PasswordInput } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
+import {
+  ForgotPasswordBottomSheet,
+  type SignUpValidation,
+  signUpValidation,
+  useSignUp,
+} from "@/features/auth";
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
+  const { control, handleSubmit } = useForm<SignUpValidation>({
+    resolver: zodResolver(signUpValidation),
+    defaultValues: { email: "", password: "" },
+    mode: "onChange",
+  });
+
+  const { mutate, error, isPending } = useSignUp();
+
+  const onSubmit = async (data: SignUpValidation) => {
+    mutate(data);
+  };
+
   return (
     <View
       style={{
@@ -23,9 +43,7 @@ const SignInScreen = () => {
         <Image
           source={require("public/core/icon.png")}
           width={200}
-          containerStyle={{
-            padding: 20,
-          }}
+          containerStyle={{ padding: 20 }}
         />
         <Text
           style={{
@@ -39,12 +57,50 @@ const SignInScreen = () => {
         </Text>
       </View>
 
+      {error && <Text style={{ color: "red" }}>{error.message}</Text>}
+
       <View style={{ display: "flex", gap: 12 }}>
-        <Input label="Email" placeholder="Enter your email" icon={Mail} />
-        <Input label="Password" placeholder="Enter your password" icon={Lock} />
-        <Link href={"/(screens)/(protected)/(tabs)/home"} asChild>
-          <Button>Sign in</Button>
-        </Link>
+        <Controller
+          control={control}
+          name="email"
+          render={({
+            field: { onChange, onBlur, value },
+            formState: { errors },
+          }) => (
+            <Input
+              label="Email"
+              placeholder="Enter your email"
+              icon={Mail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              error={errors.email?.message}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="password"
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
+            <PasswordInput
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={error?.message}
+            />
+          )}
+        />
+
+        <Button onPress={handleSubmit(onSubmit)} loading={isPending}>
+          Sign up
+        </Button>
         <ForgotPasswordBottomSheet />
       </View>
 
@@ -58,4 +114,4 @@ const SignInScreen = () => {
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
