@@ -1,11 +1,11 @@
 import { router } from "expo-router";
 import {
-  Bell,
-  Calendar,
-  CheckSquare,
-  ListTodo,
+  CreditCard,
+  Flame,
+  Package,
+  ShoppingCart,
   Smile,
-  Star,
+  Truck,
 } from "lucide-react-native";
 import { Onboarding, useOnboarding } from "@/components/ui/onboarding";
 import { Text } from "@/components/ui/text";
@@ -14,39 +14,38 @@ import { View } from "@/components/ui/view";
 export const onboardingPresets = [
   {
     id: "welcome",
-    title: "Welcome to TaskBuddy",
-    description:
-      "Organize your day and stay on top of your tasks effortlessly.",
-    icon: <ListTodo size={80} color="#FBC02D" />,
+    title: "Welcome to Tanuri",
+    description: "Order LPG gas and accessories quickly and securely.",
+    icon: <Flame size={80} color="#F57C00" />,
   },
   {
-    id: "create-complete",
-    title: "Create & Complete",
-    description: "Add new to-dos in seconds and check them off when done.",
-    icon: <CheckSquare size={80} color="#E91E63" />,
+    id: "easy-ordering",
+    title: "Easy Ordering",
+    description: "Choose your cylinder size or accessories in just a few taps.",
+    icon: <ShoppingCart size={80} color="#2196F3" />,
   },
   {
-    id: "reminders",
-    title: "Get Reminders",
-    description: "Never miss a deadline with smart notifications.",
-    icon: <Bell size={80} color="#2196F3" />,
+    id: "safe-packaging",
+    title: "Safe Packaging",
+    description: "All products are sealed, tested, and delivered with care.",
+    icon: <Package size={80} color="#4CAF50" />,
   },
   {
-    id: "plan-ahead",
-    title: "Plan Ahead",
-    description: "Schedule tasks for the days that matter most.",
-    icon: <Calendar size={80} color="#9C27B0" />,
+    id: "fast-delivery",
+    title: "Fast Delivery",
+    description: "Get your gas delivered straight to your doorstep on time.",
+    icon: <Truck size={80} color="#9C27B0" />,
   },
   {
-    id: "prioritize",
-    title: "Prioritize What Matters",
-    description: "Mark important tasks so you focus on what's key.",
-    icon: <Star size={80} color="#FF9800" />,
+    id: "secure-payment",
+    title: "Secure Payment",
+    description: "Pay safely using cards, wallets, or cash on delivery.",
+    icon: <CreditCard size={80} color="#FF9800" />,
   },
   {
-    id: "stay-motivated",
-    title: "Stay Motivated",
-    description: "Enjoy small wins every day as you tick off your list.",
+    id: "stay-happy",
+    title: "Stay Happy",
+    description: "Enjoy peace of mind knowing your gas needs are sorted.",
     icon: <Smile size={80} color="#4CAF50" />,
   },
 ];
@@ -87,7 +86,7 @@ const OnboardingScreen = () => {
       showSkip={true}
       showProgress={true}
       swipeEnabled={true}
-      primaryButtonText="Get Started"
+      primaryButtonText="Start Ordering"
       skipButtonText="Skip"
       nextButtonText="Next"
       backButtonText="Back"
