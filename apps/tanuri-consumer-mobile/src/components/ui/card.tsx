@@ -2,7 +2,7 @@ import type { TextStyle, ViewStyle } from "react-native";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS } from "@/theme/globals";
+import { BORDER_RADIUS } from "@/styles/theme/globals";
 
 interface CardProps {
   children: React.ReactNode;

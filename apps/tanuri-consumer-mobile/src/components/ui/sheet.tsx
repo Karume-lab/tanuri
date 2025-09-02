@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS, FONT_SIZE } from "@/theme/globals";
+import { BORDER_RADIUS, FONT_SIZE } from "@/styles/theme/globals";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -103,7 +103,7 @@ export function SheetContent({ children, style }: SheetContentProps) {
 
   // Animation values
   const slideAnim = useRef(
-    new Animated.Value(side === "left" ? -sheetWidth : sheetWidth),
+    new Animated.Value(side === "left" ? -sheetWidth : sheetWidth)
   ).current;
   const overlayOpacity = useRef(new Animated.Value(0)).current;
   const [isVisible, setIsVisible] = React.useState(false);

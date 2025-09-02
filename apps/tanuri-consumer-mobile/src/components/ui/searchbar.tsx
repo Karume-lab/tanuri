@@ -13,7 +13,7 @@ import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { CORNERS, FONT_SIZE, HEIGHT } from "@/theme/globals";
+import { CORNERS, FONT_SIZE, HEIGHT } from "@/styles/theme/globals";
 
 interface SearchBarProps extends Omit<TextInputProps, "style"> {
   loading?: boolean;
@@ -73,7 +73,7 @@ export function SearchBar({
         }
       }
     },
-    [onChangeText, onSearch, debounceMs, shouldDebounce],
+    [onChangeText, onSearch, debounceMs, shouldDebounce]
   );
 
   // Handle clear button press
@@ -178,7 +178,7 @@ export function SearchBarWithSuggestions({
     .filter((suggestion) =>
       suggestion
         .toLowerCase()
-        .includes((searchBarProps.value || "").toLowerCase()),
+        .includes((searchBarProps.value || "").toLowerCase())
     )
     .slice(0, maxSuggestions);
 

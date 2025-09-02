@@ -18,7 +18,7 @@ import { Icon } from "@/components/ui/icon";
 import { ButtonSpinner, type SpinnerVariant } from "@/components/ui/spinner";
 import { Text } from "@/components/ui/text";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { CORNERS, FONT_SIZE, HEIGHT } from "@/theme/globals";
+import { CORNERS, FONT_SIZE, HEIGHT } from "@/styles/theme/globals";
 
 export type ButtonVariant =
   | "default"
@@ -64,7 +64,7 @@ export const Button = forwardRef<View, ButtonProps>(
       textStyle,
       ...props
     },
-    ref,
+    ref
   ) => {
     const primaryColor = useThemeColor({}, "primary");
     const primaryForegroundColor = useThemeColor({}, "primaryForeground");
@@ -73,7 +73,7 @@ export const Button = forwardRef<View, ButtonProps>(
     const destructiveColor = useThemeColor({}, "red");
     const destructiveForegroundColor = useThemeColor(
       {},
-      "destructiveForeground",
+      "destructiveForeground"
     );
     const greenColor = useThemeColor({}, "green");
     const borderColor = useThemeColor({}, "border");
@@ -298,11 +298,11 @@ export const Button = forwardRef<View, ButtonProps>(
             alignSelf: "stretch",
           }
         : flexValue !== null
-          ? {
-              flex: flexValue,
-              maxHeight: size === "sm" ? 44 : size === "lg" ? 54 : HEIGHT,
-            }
-          : {};
+        ? {
+            flex: flexValue,
+            maxHeight: size === "sm" ? 44 : size === "lg" ? 54 : HEIGHT,
+          }
+        : {};
     };
 
     // Updated getStyleWithoutFlex function
@@ -388,7 +388,7 @@ export const Button = forwardRef<View, ButtonProps>(
         )}
       </TouchableOpacity>
     );
-  },
+  }
 );
 
 // Add display name for better debugging

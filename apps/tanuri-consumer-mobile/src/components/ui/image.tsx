@@ -8,7 +8,7 @@ import { ActivityIndicator, StyleSheet } from "react-native";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS, CORNERS } from "@/theme/globals";
+import { BORDER_RADIUS, CORNERS } from "@/styles/theme/globals";
 
 export interface ImageProps extends Omit<ExpoImageProps, "style"> {
   variant?: "rounded" | "circle" | "default";
@@ -44,7 +44,7 @@ export const Image = forwardRef<ExpoImage, ImageProps>(
       transition = 200,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
@@ -145,7 +145,7 @@ export const Image = forwardRef<ExpoImage, ImageProps>(
         )}
       </View>
     );
-  },
+  }
 );
 
 const styles = StyleSheet.create({

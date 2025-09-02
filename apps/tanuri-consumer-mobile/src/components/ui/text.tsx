@@ -6,7 +6,7 @@ import {
   type TextStyle,
 } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { FONT_SIZE } from "@/theme/globals";
+import { FONT_SIZE } from "@/styles/theme/globals";
 
 type TextVariant =
   | "body"
@@ -26,11 +26,11 @@ interface TextProps extends RNTextProps {
 export const Text = forwardRef<RNText, TextProps>(
   (
     { variant = "body", lightColor, darkColor, style, children, ...props },
-    ref,
+    ref
   ) => {
     const textColor = useThemeColor(
       { light: lightColor, dark: darkColor },
-      "text",
+      "text"
     );
     const mutedColor = useThemeColor({}, "textMuted");
 
@@ -86,7 +86,7 @@ export const Text = forwardRef<RNText, TextProps>(
         {children}
       </RNText>
     );
-  },
+  }
 );
 
 Text.displayName = "Text";

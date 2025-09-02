@@ -20,7 +20,7 @@ import Animated, {
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS } from "@/theme/globals";
+import { BORDER_RADIUS } from "@/styles/theme/globals";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const MAX_TRANSLATE_Y = -SCREEN_HEIGHT + 50;

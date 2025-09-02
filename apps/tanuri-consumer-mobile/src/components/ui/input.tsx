@@ -11,7 +11,12 @@ import {
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS, CORNERS, FONT_SIZE, HEIGHT } from "@/theme/globals";
+import {
+  BORDER_RADIUS,
+  CORNERS,
+  FONT_SIZE,
+  HEIGHT,
+} from "@/styles/theme/globals";
 
 export interface InputProps extends Omit<TextInputProps, "style"> {
   label?: string;
@@ -49,7 +54,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       placeholder,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [isFocused, setIsFocused] = useState(false);
 
@@ -291,7 +296,7 @@ export const Input = forwardRef<TextInput, InputProps>(
     );
 
     return renderInputContent();
-  },
+  }
 );
 
 export interface GroupedInputProps {
@@ -316,7 +321,7 @@ export const GroupedInput = ({
   const errors = childrenArray
     .filter(
       (child): child is ReactElement<any> =>
-        React.isValidElement(child) && !!(child.props as any).error,
+        React.isValidElement(child) && !!(child.props as any).error
     )
     .map((child) => child.props.error);
 
@@ -411,7 +416,7 @@ export const GroupedInputItem = forwardRef<TextInput, GroupedInputItemProps>(
       placeholder,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [isFocused, setIsFocused] = useState(false);
 
@@ -603,5 +608,5 @@ export const GroupedInputItem = forwardRef<TextInput, GroupedInputItemProps>(
     );
 
     return renderItemContent();
-  },
+  }
 );

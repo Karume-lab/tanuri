@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ThemeProvider } from "@/theme/theme-provider";
+import { ThemeProvider } from "@/styles/theme/theme-provider";
 import "react-native-reanimated";
 import { ProvidersContainer } from "@/components";
 

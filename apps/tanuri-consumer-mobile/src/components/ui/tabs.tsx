@@ -25,7 +25,12 @@ import Animated, {
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS, CORNERS, FONT_SIZE, HEIGHT } from "@/theme/globals";
+import {
+  BORDER_RADIUS,
+  CORNERS,
+  FONT_SIZE,
+  HEIGHT,
+} from "@/styles/theme/globals";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -148,7 +153,7 @@ export function Tabs({
         setActiveTab(nextTab);
       }
     },
-    [tabValues, activeTab, setActiveTab],
+    [tabValues, activeTab, setActiveTab]
   );
 
   return (
@@ -288,7 +293,7 @@ function CarouselContainer({
       translateX.value,
       [0, screenWidth * 0.5],
       [0, 1],
-      Extrapolate.CLAMP,
+      Extrapolate.CLAMP
     );
 
     return {
@@ -302,7 +307,7 @@ function CarouselContainer({
       translateX.value,
       [-screenWidth * 0.5, 0],
       [1, 0],
-      Extrapolate.CLAMP,
+      Extrapolate.CLAMP
     );
 
     return {

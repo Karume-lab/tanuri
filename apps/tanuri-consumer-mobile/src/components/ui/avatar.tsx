@@ -4,7 +4,7 @@ import { Image } from "@/components/ui/image";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { FONT_SIZE } from "@/theme/globals";
+import { FONT_SIZE } from "@/styles/theme/globals";
 
 interface AvatarProps {
   children: React.ReactNode;

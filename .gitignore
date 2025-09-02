@@ -23,6 +23,7 @@ next-env.d.ts
 # Expo
 android/
 ios/
+expo-env.d.ts
 
 # Django
 venv

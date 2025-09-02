@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Text } from "@/components/ui/text";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { BORDER_RADIUS, CORNERS, FONT_SIZE } from "@/theme/globals";
+import { BORDER_RADIUS, CORNERS, FONT_SIZE } from "@/styles/theme/globals";
 
 // Types
 type SpinnerSize = "default" | "sm" | "lg" | "icon";
@@ -102,7 +102,7 @@ export function Spinner({
           toValue: 1,
           duration: animationDuration,
           useNativeDriver: true,
-        }),
+        })
       );
       rotateAnimation.start();
       return () => rotateAnimation.stop();
@@ -124,7 +124,7 @@ export function Spinner({
             duration: animationDuration / 2,
             useNativeDriver: true,
           }),
-        ]),
+        ])
       );
       pulseAnimation.start();
       return () => pulseAnimation.stop();
@@ -148,11 +148,11 @@ export function Spinner({
               duration: animationDuration / 3,
               useNativeDriver: true,
             }),
-          ]),
+          ])
         );
 
       const animations = dotsAnim.map((anim, index) =>
-        createDotAnimation(anim, index * (animationDuration / 6)),
+        createDotAnimation(anim, index * (animationDuration / 6))
       );
 
       animations.forEach((anim) => anim.start());
@@ -177,11 +177,11 @@ export function Spinner({
               duration: animationDuration / 4,
               useNativeDriver: true,
             }),
-          ]),
+          ])
         );
 
       const animations = barsAnim.map((anim, index) =>
-        createBarAnimation(anim, index * (animationDuration / 8)),
+        createBarAnimation(anim, index * (animationDuration / 8))
       );
 
       animations.forEach((anim) => anim.start());
