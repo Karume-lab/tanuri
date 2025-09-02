@@ -1,31 +1,45 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { router } from "expo-router";
 import { Mail } from "lucide-react-native";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { PasswordInput } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
 import { Text } from "@/components/ui/text";
+import { useToast } from "@/components/ui/toast";
 import { View } from "@/components/ui/view";
 import {
-  ForgotPasswordBottomSheet,
   type SignUpValidation,
   signUpValidation,
   useSignUp,
 } from "@/features/auth";
 
 const SignUpScreen = () => {
-  const { control, handleSubmit } = useForm<SignUpValidation>({
+  const form = useForm<SignUpValidation>({
     resolver: zodResolver(signUpValidation),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: "some@mail.com", password: "hello@Tanuri123" },
     mode: "onChange",
   });
 
-  const { mutate, error, isPending } = useSignUp();
+  const { error: toastError } = useToast();
 
-  const onSubmit = async (data: SignUpValidation) => {
-    mutate(data);
+  const { mutate, isPending } = useSignUp();
+
+  const onSubmit: SubmitHandler<SignUpValidation> = (
+    data: SignUpValidation,
+  ) => {
+    mutate(data, {
+      onSuccess: () => {
+        form.reset();
+        router.replace("/home");
+      },
+      onError: (error) => {
+        console.error(error);
+        toastError("An error occurred while signing you up");
+      },
+    });
   };
 
   return (
@@ -57,11 +71,9 @@ const SignUpScreen = () => {
         </Text>
       </View>
 
-      {error && <Text style={{ color: "red" }}>{error.message}</Text>}
-
       <View style={{ display: "flex", gap: 12 }}>
         <Controller
-          control={control}
+          control={form.control}
           name="email"
           render={({
             field: { onChange, onBlur, value },
@@ -83,7 +95,7 @@ const SignUpScreen = () => {
         />
 
         <Controller
-          control={control}
+          control={form.control}
           name="password"
           render={({
             field: { onChange, onBlur, value },
@@ -98,16 +110,15 @@ const SignUpScreen = () => {
           )}
         />
 
-        <Button onPress={handleSubmit(onSubmit)} loading={isPending}>
+        <Button onPress={form.handleSubmit(onSubmit)} loading={isPending}>
           Sign up
         </Button>
-        <ForgotPasswordBottomSheet />
       </View>
 
       <Link href="/auth/sign-up" asChild style={{ marginTop: "auto" }}>
         <Text style={{ textDecorationLine: "none" }}>
-          Don&apos;t have an account?{" "}
-          <Text style={{ fontWeight: "bold" }}>Sign up</Text>
+          Already have an account?{" "}
+          <Text style={{ fontWeight: "bold" }}>Sign in</Text>
         </Text>
       </Link>
     </View>

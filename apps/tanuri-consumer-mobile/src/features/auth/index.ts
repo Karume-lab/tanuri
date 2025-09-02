@@ -5,10 +5,15 @@ export * from "./components";
 
 // Hooks
 export * from "./hooks";
+
 // Styles
 export * from "./styles";
+
 // Types
 export * from "./types";
+
+// URLS
+export * from "./urls";
 
 // Utils
 export * from "./utils";
