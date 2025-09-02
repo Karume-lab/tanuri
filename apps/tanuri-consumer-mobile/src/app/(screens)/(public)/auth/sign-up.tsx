@@ -21,7 +21,7 @@ const SignInScreen = () => {
     >
       <View style={{ width: 200, height: 200 }}>
         <Image
-          source={require("public/images/icon.png")}
+          source={require("public/core/icon.png")}
           width={200}
           containerStyle={{
             padding: 20,
@@ -35,7 +35,7 @@ const SignInScreen = () => {
             marginVertical: 12,
           }}
         >
-          Taska
+          Tanuri
         </Text>
       </View>
 

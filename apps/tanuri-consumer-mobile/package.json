@@ -3,12 +3,12 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "dev": "expo start",
-    "android": "expo run:android",
+    "dev": "expo start --dev-client",
+    "start": "expo start --go",
+    "android": "expo prebuild --clean && expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "prebuild": "expo prebuild --clean",
-    "build": "bun run prebuild && ./android/gradlew -p android assembleRelease",
+    "build": "expo prebuild --clean && ./android/gradlew -p android assembleRelease",
     "install-apk": "adb install ./android/app/build/outputs/apk/release/app-release.apk",
     "build:install-apk": "bun run build && bun run install-apk"
   },
