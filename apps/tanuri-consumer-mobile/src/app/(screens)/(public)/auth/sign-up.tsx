@@ -19,7 +19,7 @@ import {
 const SignUpScreen = () => {
   const form = useForm<SignUpValidation>({
     resolver: zodResolver(signUpValidation),
-    defaultValues: { email: "some@mail.com", password: "hello@Tanuri123" },
+    defaultValues: { email: "", password: "" },
     mode: "onChange",
   });
 
