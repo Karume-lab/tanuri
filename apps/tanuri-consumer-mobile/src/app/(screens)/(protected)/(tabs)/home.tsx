@@ -1,11 +1,15 @@
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Button } from "@/components/ui/button";
 import { ScrollView } from "@/components/ui/scroll-view";
 import { Text } from "@/components/ui/text";
+import { useSession } from "@/features/auth";
 
 const HomeScreen = () => {
   const bottom = useBottomTabBarHeight();
   const { top: topSafeAreaInset } = useSafeAreaInsets();
+
+  const { clearSession } = useSession();
 
   return (
     <ScrollView
@@ -17,6 +21,7 @@ const HomeScreen = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text>HOME</Text>
+      <Button onPress={clearSession}>Sign out</Button>
     </ScrollView>
   );
 };

@@ -20,3 +20,10 @@ export interface SignInError {
   password?: string[];
   [key: string]: string[] | undefined;
 }
+
+export interface Session {
+  userId: string;
+  email: string;
+  access: string;
+  refresh: string;
+}

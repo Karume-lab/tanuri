@@ -7,9 +7,9 @@ import {
   Smile,
   Truck,
 } from "lucide-react-native";
+import { useEffect } from "react";
 import { Onboarding, useOnboarding } from "@/components/ui/onboarding";
-import { Text } from "@/components/ui/text";
-import { View } from "@/components/ui/view";
+import { useSession } from "@/features/auth";
 
 export const onboardingPresets = [
   {
@@ -53,24 +53,13 @@ export const onboardingPresets = [
 const OnboardingScreen = () => {
   const { hasCompletedOnboarding, completeOnboarding, skipOnboarding } =
     useOnboarding();
+  const { setIsOnBoarded } = useSession();
 
-  if (hasCompletedOnboarding) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          paddingHorizontal: 24,
-        }}
-      >
-        <Text variant="title">Welcome Back!</Text>
-        <Text variant="body">
-          You&apos;ve already completed the onboarding.
-        </Text>
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (hasCompletedOnboarding) {
+      setIsOnBoarded();
+    }
+  }, [hasCompletedOnboarding, setIsOnBoarded]);
 
   return (
     <Onboarding

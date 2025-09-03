@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
 import { Mail } from "lucide-react-native";
+import { useRef } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+import type { TextInput } from "react-native";
 import { PasswordInput } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
@@ -13,6 +14,7 @@ import { View } from "@/components/ui/view";
 import {
   type SignInValidation,
   signInValidation,
+  useSession,
   useSignIn,
 } from "@/features/auth";
 import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
@@ -20,21 +22,22 @@ import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
 const SignInScreen = () => {
   const form = useForm<SignInValidation>({
     resolver: zodResolver(signInValidation),
-    defaultValues: { email: "some@mail.com", password: "hello@Tanuri123" },
+    defaultValues: { email: "", password: "" },
     mode: "onChange",
   });
 
   const { error: toastError, success: toastSuccess } = useToast();
-
   const { mutate, isPending } = useSignIn();
+  const { setSession } = useSession();
+
+  const passwordRef = useRef<TextInput>(null);
 
   const handleSignIn: SubmitHandler<SignInValidation> = (data) => {
     mutate(data, {
       onSuccess: (data) => {
-        console.log(data);
-        toastSuccess("Signed in successfully!");
-        // form.reset();
-        // router.replace("/home");
+        setSession({ userId: "", email: "", ...data });
+        toastSuccess("Signed in successfully");
+        form.reset();
       },
       onError: (error) => {
         tranformAPIErrorsToArrayOfStrings(error, "signing in").forEach(
@@ -94,6 +97,9 @@ const SignInScreen = () => {
               onChangeText={onChange}
               onBlur={onBlur}
               error={errors.email?.message}
+              returnKeyType="next"
+              onSubmitEditing={() => passwordRef.current?.focus()}
+              blurOnSubmit={false}
             />
           )}
         />
@@ -106,10 +112,13 @@ const SignInScreen = () => {
             fieldState: { error },
           }) => (
             <PasswordInput
+              ref={passwordRef}
               value={value}
               onChange={onChange}
               onBlur={onBlur}
               error={error?.message}
+              returnKeyType="done"
+              onSubmitEditing={form.handleSubmit(handleSignIn)}
             />
           )}
         />

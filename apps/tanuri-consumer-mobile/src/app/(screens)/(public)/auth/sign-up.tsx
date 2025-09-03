@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
 import { Mail } from "lucide-react-native";
+import { useRef } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+import type { TextInput } from "react-native";
 import { PasswordInput } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
@@ -13,6 +14,8 @@ import { View } from "@/components/ui/view";
 import {
   type SignUpValidation,
   signUpValidation,
+  useSession,
+  useSignIn,
   useSignUp,
 } from "@/features/auth";
 import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
@@ -25,15 +28,29 @@ const SignUpScreen = () => {
   });
 
   const { error: toastError, success: toastSuccess } = useToast();
+  const { mutate: signUpMutate, isPending: signUpPending } = useSignUp();
+  const { mutate: signInMutate, isPending: signInPending } = useSignIn();
+  const { setSession } = useSession();
 
-  const { mutate, isPending } = useSignUp();
+  const passwordRef = useRef<TextInput>(null);
 
   const handleSignUp: SubmitHandler<SignUpValidation> = (data) => {
-    mutate(data, {
+    signUpMutate(data, {
       onSuccess: () => {
-        toastSuccess("Signed up successfully!");
-        form.reset();
-        router.replace("/home");
+        signInMutate(data, {
+          onSuccess: (sessionData) => {
+            setSession({ userId: "", email: data.email, ...sessionData });
+            toastSuccess("Signed up successfully");
+            form.reset();
+          },
+          onError: (error) => {
+            tranformAPIErrorsToArrayOfStrings(error, "signing in").forEach(
+              (msg) => {
+                toastError(msg);
+              },
+            );
+          },
+        });
       },
       onError: (error) => {
         tranformAPIErrorsToArrayOfStrings(error, "signing up").forEach(
@@ -93,6 +110,9 @@ const SignUpScreen = () => {
               onChangeText={onChange}
               onBlur={onBlur}
               error={errors.email?.message}
+              returnKeyType="next"
+              onSubmitEditing={() => passwordRef.current?.focus()}
+              blurOnSubmit={false}
             />
           )}
         />
@@ -105,15 +125,21 @@ const SignUpScreen = () => {
             fieldState: { error },
           }) => (
             <PasswordInput
+              ref={passwordRef}
               value={value}
               onChange={onChange}
               onBlur={onBlur}
               error={error?.message}
+              returnKeyType="done"
+              onSubmitEditing={form.handleSubmit(handleSignUp)}
             />
           )}
         />
 
-        <Button onPress={form.handleSubmit(handleSignUp)} loading={isPending}>
+        <Button
+          onPress={form.handleSubmit(handleSignUp)}
+          loading={signUpPending || signInPending}
+        >
           Sign up
         </Button>
       </View>
