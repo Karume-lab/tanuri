@@ -23,7 +23,7 @@ const SignUpScreen = () => {
     mode: "onChange",
   });
 
-  const { error: toastError } = useToast();
+  const { error: toastError, success: toastSuccess } = useToast();
 
   const { mutate, isPending } = useSignUp();
 
@@ -32,12 +32,25 @@ const SignUpScreen = () => {
   ) => {
     mutate(data, {
       onSuccess: () => {
+        toastSuccess("Signed up successfully!");
         form.reset();
         router.replace("/home");
       },
       onError: (error) => {
-        console.error(error);
-        toastError("An error occurred while signing you up");
+        const messages = [
+          ...(error.email || []),
+          ...(error.password || []),
+          ...(error.phone_number || []),
+          ...(error.non_field_errors || []),
+        ];
+
+        if (messages.length > 0) {
+          messages.forEach((msg) => {
+            toastError(msg);
+          });
+        } else {
+          toastError("An error occurred while signing up. Please try again.");
+        }
       },
     });
   };
