@@ -24,7 +24,7 @@ const RootLayout = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="(screens)/(public)/auth/reset-password"
+              name="(screens)/(public)/auth/forgot-password"
               options={{ headerShown: false }}
             />
             <Stack.Screen

@@ -15,6 +15,7 @@ import {
   signUpValidation,
   useSignUp,
 } from "@/features/auth";
+import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
 
 const SignUpScreen = () => {
   const form = useForm<SignUpValidation>({
@@ -27,9 +28,7 @@ const SignUpScreen = () => {
 
   const { mutate, isPending } = useSignUp();
 
-  const onSubmit: SubmitHandler<SignUpValidation> = (
-    data: SignUpValidation,
-  ) => {
+  const handleSignUp: SubmitHandler<SignUpValidation> = (data) => {
     mutate(data, {
       onSuccess: () => {
         toastSuccess("Signed up successfully!");
@@ -37,20 +36,11 @@ const SignUpScreen = () => {
         router.replace("/home");
       },
       onError: (error) => {
-        const messages = [
-          ...(error.email || []),
-          ...(error.password || []),
-          ...(error.phone_number || []),
-          ...(error.non_field_errors || []),
-        ];
-
-        if (messages.length > 0) {
-          messages.forEach((msg) => {
+        tranformAPIErrorsToArrayOfStrings(error, "signing up").forEach(
+          (msg) => {
             toastError(msg);
-          });
-        } else {
-          toastError("An error occurred while signing up. Please try again.");
-        }
+          },
+        );
       },
     });
   };
@@ -123,12 +113,12 @@ const SignUpScreen = () => {
           )}
         />
 
-        <Button onPress={form.handleSubmit(onSubmit)} loading={isPending}>
+        <Button onPress={form.handleSubmit(handleSignUp)} loading={isPending}>
           Sign up
         </Button>
       </View>
 
-      <Link href="/auth/sign-up" asChild style={{ marginTop: "auto" }}>
+      <Link href="/auth/sign-in" asChild style={{ marginTop: "auto" }}>
         <Text style={{ textDecorationLine: "none" }}>
           Already have an account?{" "}
           <Text style={{ fontWeight: "bold" }}>Sign in</Text>
