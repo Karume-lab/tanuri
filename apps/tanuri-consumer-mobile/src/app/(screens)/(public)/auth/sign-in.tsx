@@ -16,6 +16,7 @@ import {
   signInValidation,
   useSession,
   useSignIn,
+  useUser,
 } from "@/features/auth";
 import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
 
@@ -29,13 +30,18 @@ const SignInScreen = () => {
   const { error: toastError, success: toastSuccess } = useToast();
   const { mutate, isPending } = useSignIn();
   const { setSession } = useSession();
+  const { data: userData } = useUser();
 
   const passwordRef = useRef<TextInput>(null);
 
   const handleSignIn: SubmitHandler<SignInValidation> = (data) => {
     mutate(data, {
       onSuccess: (data) => {
-        setSession({ userId: "", email: "", ...data });
+        setSession({
+          userId: userData?.id ?? 0,
+          email: userData?.email ?? "",
+          ...data,
+        });
         toastSuccess("Signed in successfully");
         form.reset();
       },

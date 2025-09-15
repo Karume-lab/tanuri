@@ -22,8 +22,13 @@ export interface SignInError {
 }
 
 export interface Session {
-  userId: string;
+  userId: number;
   email: string;
   access: string;
   refresh: string;
+}
+
+export interface UserResponse {
+  id: number;
+  email: string;
 }

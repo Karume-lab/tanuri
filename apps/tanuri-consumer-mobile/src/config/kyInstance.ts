@@ -13,20 +13,19 @@ export const authApi = baseApi.extend({
   prefixUrl: AUTH_API_PREFIX_URL,
 });
 
-const getAuthHeaders = async () => {
-  // const { getSession } = await import("next-auth/react");
-  const { getSession } = { getSession: async () => ({ accessToken: "" }) };
-  const session = await getSession();
-  return session?.accessToken
-    ? { Authorization: `Bearer ${session.accessToken}` }
-    : {};
+const getAuthHeaders = () => {
+  const session = {
+    access:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2OTA1NDQ2LCJpYXQiOjE3NTY5MDUxNDYsImp0aSI6IjFlMmEyMGQwNjA2ZjQzNzQ4NzVlYTNkNDliZmI2NDlhIiwidXNlcl9pZCI6IjkifQ.2woj_uQFl7c-cr7kH7Qx24uLFLNngpBaggDTTSWWmiY",
+  };
+  return { Authorization: `Bearer ${session.access}` };
 };
 
 export const protectedApi = baseApi.extend({
   hooks: {
     beforeRequest: [
-      async (request) => {
-        const headers = await getAuthHeaders();
+      (request) => {
+        const headers = getAuthHeaders();
         Object.entries(headers).forEach(([key, value]) => {
           request.headers.set(key, value);
         });

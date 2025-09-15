@@ -3,13 +3,16 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/components/ui/button";
 import { ScrollView } from "@/components/ui/scroll-view";
 import { Text } from "@/components/ui/text";
-import { useSession } from "@/features/auth";
+import { useSession, useUser } from "@/features/auth";
 
 const HomeScreen = () => {
   const bottom = useBottomTabBarHeight();
   const { top: topSafeAreaInset } = useSafeAreaInsets();
 
   const { clearSession } = useSession();
+  const { data } = useUser();
+
+  console.log(data?.id);
 
   return (
     <ScrollView

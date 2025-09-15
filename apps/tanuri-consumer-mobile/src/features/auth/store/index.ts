@@ -87,3 +87,5 @@ export const useSessionStore = create<SessionStates & SessionActions>()(
     },
   ),
 );
+
+export const getSession = () => useSessionStore.getState();
