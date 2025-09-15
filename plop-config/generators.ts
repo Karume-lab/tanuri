@@ -118,6 +118,7 @@ export const getFeatureGeneratorConfig = (
       message: "Which parts do you want to generate?",
       choices: () => {
         const files = [
+          "index.ts",
           "components/index.ts",
           "components/containers/index.ts",
           "components/layouts/index.ts",
@@ -125,8 +126,9 @@ export const getFeatureGeneratorConfig = (
           "hooks/index.ts",
           "hooks/api/mutations.ts",
           "hooks/api/queries.ts",
-          "styles/index.css",
+          "store/index.ts",
           "types/index.ts",
+          "urls/index.ts",
           "utils/index.ts",
           "validations/index.ts",
         ];
@@ -137,22 +139,22 @@ export const getFeatureGeneratorConfig = (
         ];
       },
       filter: (input: string[]) => {
-        if (input.includes("*")) {
-          return [
-            "components/index.ts",
-            "components/containers/index.ts",
-            "components/layouts/index.ts",
-            "components/presenters/index.ts",
-            "hooks/index.ts",
-            "hooks/api/mutations.ts",
-            "hooks/api/queries.ts",
-            "styles/index.css",
-            "types/index.ts",
-            "utils/index.ts",
-            "validations/index.ts",
-          ];
-        }
-        return input;
+        const allFiles = [
+          "index.ts",
+          "components/index.ts",
+          "components/containers/index.ts",
+          "components/layouts/index.ts",
+          "components/presenters/index.ts",
+          "hooks/index.ts",
+          "hooks/api/mutations.ts",
+          "hooks/api/queries.ts",
+          "store/index.ts",
+          "types/index.ts",
+          "urls/index.ts",
+          "utils/index.ts",
+          "validations/index.ts",
+        ];
+        return input.includes("*") ? allFiles : input;
       },
     },
   ],
@@ -168,6 +170,26 @@ export const getFeatureGeneratorConfig = (
     );
 
     const templates: Record<string, string> = {
+      "index.ts": `// Barrel file for {{pascalCase feature}} feature
+
+// Components
+export * from "./components";
+
+// Hooks
+export * from "./hooks";
+
+// Types
+export * from "./types";
+
+// URLS
+export * from "./urls";
+
+// Utils
+export * from "./utils";
+
+// Validations
+export * from "./validations";
+`,
       "components/index.ts": "// Components for {{pascalCase feature}}",
       "components/containers/index.ts":
         "// Containers for {{pascalCase feature}}",
@@ -177,8 +199,9 @@ export const getFeatureGeneratorConfig = (
       "hooks/index.ts": "// Hooks for {{pascalCase feature}}",
       "hooks/api/mutations.ts": "// API mutations for {{pascalCase feature}}",
       "hooks/api/queries.ts": "// API queries for {{pascalCase feature}}",
-      "styles/index.css": "/* Styles for {{pascalCase feature}} */",
+      "store/index.ts": "// Store for {{pascalCase feature}}",
       "types/index.ts": "// Types for {{pascalCase feature}}",
+      "urls/index.ts": "// URLs for {{pascalCase feature}}",
       "utils/index.ts": "// Utils for {{pascalCase feature}}",
       "validations/index.ts": "// Validations for {{pascalCase feature}}",
     };
