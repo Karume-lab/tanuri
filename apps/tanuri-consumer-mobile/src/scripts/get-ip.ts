@@ -13,7 +13,7 @@ interface NetworkInfo {
   interface: string;
 }
 
-function getNetworkCommand(): string {
+const getNetworkCommand = (): string => {
   const platform = process.platform;
 
   switch (platform) {
@@ -25,9 +25,9 @@ function getNetworkCommand(): string {
     default:
       throw new Error(`❌ Unsupported platform: ${platform}`);
   }
-}
+};
 
-function parseWindowsOutput(stdout: string): NetworkInfo | null {
+const parseWindowsOutput = (stdout: string): NetworkInfo | null => {
   const sections = stdout.split(/(?=\w.*adapter)/);
   const wifiSection = sections.find(
     (section) =>
@@ -53,9 +53,9 @@ function parseWindowsOutput(stdout: string): NetworkInfo | null {
     ip: match[1],
     interface: "Wi-Fi",
   };
-}
+};
 
-function parseUnixOutput(stdout: string): NetworkInfo | null {
+const parseUnixOutput = (stdout: string): NetworkInfo | null => {
   const sections = stdout.split(/^(\w+):/m);
 
   // Look for common network interfaces
@@ -85,9 +85,9 @@ function parseUnixOutput(stdout: string): NetworkInfo | null {
 
   console.error("❌ No valid network interface found.");
   return null;
-}
+};
 
-function parseNetworkOutput(stdout: string): NetworkInfo | null {
+const parseNetworkOutput = (stdout: string): NetworkInfo | null => {
   const platform = process.platform;
 
   if (platform === "win32") {
@@ -95,9 +95,9 @@ function parseNetworkOutput(stdout: string): NetworkInfo | null {
   } else {
     return parseUnixOutput(stdout);
   }
-}
+};
 
-function updateEnvFile(backendUrl: string): void {
+const updateEnvFile = (backendUrl: string): void => {
   let envContent = "";
 
   if (existsSync(envPath)) {
@@ -118,9 +118,9 @@ function updateEnvFile(backendUrl: string): void {
 
   writeFileSync(envPath, `${updatedEnv.trim()}\n`, "utf-8");
   console.log(`✅ EXPO_PUBLIC_BASE_API_URL updated to: ${backendUrl}/api`);
-}
+};
 
-function main(): void {
+const main = (): void => {
   try {
     const command = getNetworkCommand();
 
@@ -145,7 +145,7 @@ function main(): void {
   } catch (error) {
     console.error("❌ Error:", error instanceof Error ? error.message : error);
   }
-}
+};
 
 // Run the script
 main();
