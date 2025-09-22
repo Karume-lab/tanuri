@@ -9,10 +9,10 @@ import { AUTH_URLS } from "@/features/auth/urls";
 export const useUser = () => {
   const { session } = useSession();
 
-  return useQuery<UserResponse>({
+  const query = useQuery<UserResponse>({
     queryKey: ["user"],
     queryFn: async () => {
-      if (!session?.access) {
+      if (!session) {
         throw new Error("JWT token is required to fetch user data");
       }
 
@@ -21,4 +21,6 @@ export const useUser = () => {
         .json<UserResponse>();
     },
   });
+
+  return query;
 };

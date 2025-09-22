@@ -10,7 +10,8 @@ const HomeScreen = () => {
   const { top: topSafeAreaInset } = useSafeAreaInsets();
 
   const { clearSession } = useSession();
-  const { data } = useUser();
+  const userQuery = useUser();
+  console.log(userQuery.data);
 
   return (
     <ScrollView
@@ -22,7 +23,7 @@ const HomeScreen = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text>HOME</Text>
-      <Text>{data?.email}</Text>
+      <Text>{userQuery.data?.email}</Text>
       <Button onPress={clearSession}>Sign out</Button>
     </ScrollView>
   );

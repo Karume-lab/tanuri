@@ -11,7 +11,7 @@ interface SessionStates {
 }
 
 interface SessionActions {
-  setSession: (session: Session) => void;
+  setSession: (session: Partial<Session>) => void;
   clearSession: () => void;
   getSession: () => Promise<void>;
   setIsOnBoarded: () => void;
@@ -21,15 +21,20 @@ const SESSION_KEY = "tanuri-session";
 
 export const useSessionStore = create<SessionStates & SessionActions>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isLoading: true,
       isAuthenticated: false,
       session: null,
       isOnboarded: false,
 
       setSession: (session) => {
+        const currentSession = get().session;
+        const updatedSession = currentSession
+          ? { ...currentSession, ...session }
+          : (session as Session);
+
         set({
-          session,
+          session: updatedSession,
           isAuthenticated: true,
           isLoading: false,
         });

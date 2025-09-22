@@ -16,36 +16,29 @@ import {
   signInValidation,
   useSession,
   useSignIn,
-  useUser,
 } from "@/features/auth";
 import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
 
 const SignInScreen = () => {
   const form = useForm<SignInValidation>({
     resolver: zodResolver(signInValidation),
-    defaultValues: { email: "", password: "" },
+    defaultValues: {
+      email: "danielkarume@outlook.com",
+      password: "hello@Tanuri123",
+    },
     mode: "onChange",
   });
 
   const toast = useToast();
   const signInMutation = useSignIn();
   const { setSession } = useSession();
-  const userQuery = useUser();
 
   const passwordRef = useRef<TextInput>(null);
 
   const handleSignIn: SubmitHandler<SignInValidation> = (data) => {
     signInMutation.mutate(data, {
       onSuccess: (data) => {
-        if (!userQuery.data) {
-          return;
-        }
-
-        setSession({
-          userId: userQuery.data.id,
-          email: userQuery.data.email,
-          ...data,
-        });
+        setSession(data);
         toast.success("Signed in successfully");
         form.reset();
       },

@@ -17,7 +17,6 @@ import {
   useSession,
   useSignIn,
   useSignUp,
-  useUser,
 } from "@/features/auth";
 import { tranformAPIErrorsToArrayOfStrings } from "@/utils";
 
@@ -31,7 +30,6 @@ const SignUpScreen = () => {
   const toast = useToast();
   const signUpMutation = useSignUp();
   const signIpMutation = useSignIn();
-  const userQuery = useUser();
   const { setSession } = useSession();
 
   const passwordRef = useRef<TextInput>(null);
@@ -41,15 +39,7 @@ const SignUpScreen = () => {
       onSuccess: () => {
         signIpMutation.mutate(data, {
           onSuccess: (data) => {
-            if (!userQuery.data) {
-              return;
-            }
-
-            setSession({
-              userId: userQuery.data.id,
-              email: userQuery.data.email,
-              ...data,
-            });
+            setSession(data);
 
             toast.success("Signed up successfully");
             form.reset();
