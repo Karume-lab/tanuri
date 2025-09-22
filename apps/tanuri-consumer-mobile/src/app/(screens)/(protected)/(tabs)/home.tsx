@@ -11,7 +11,6 @@ const HomeScreen = () => {
 
   const { clearSession } = useSession();
   const userQuery = useUser();
-  console.log(userQuery.data);
 
   return (
     <ScrollView
