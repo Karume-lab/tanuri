@@ -27,28 +27,32 @@ const SignInScreen = () => {
     mode: "onChange",
   });
 
-  const { error: toastError, success: toastSuccess } = useToast();
-  const { mutate, isPending } = useSignIn();
+  const toast = useToast();
+  const signInMutation = useSignIn();
   const { setSession } = useSession();
-  const { data: userData } = useUser();
+  const userQuery = useUser();
 
   const passwordRef = useRef<TextInput>(null);
 
   const handleSignIn: SubmitHandler<SignInValidation> = (data) => {
-    mutate(data, {
+    signInMutation.mutate(data, {
       onSuccess: (data) => {
+        if (!userQuery.data) {
+          return;
+        }
+
         setSession({
-          userId: userData?.id ?? 0,
-          email: userData?.email ?? "",
+          userId: userQuery.data.id,
+          email: userQuery.data.email,
           ...data,
         });
-        toastSuccess("Signed in successfully");
+        toast.success("Signed in successfully");
         form.reset();
       },
       onError: (error) => {
         tranformAPIErrorsToArrayOfStrings(error, "signing in").forEach(
           (msg) => {
-            toastError(msg);
+            toast.error(msg);
           },
         );
       },
@@ -129,7 +133,10 @@ const SignInScreen = () => {
           )}
         />
 
-        <Button onPress={form.handleSubmit(handleSignIn)} loading={isPending}>
+        <Button
+          onPress={form.handleSubmit(handleSignIn)}
+          loading={signInMutation.isPending}
+        >
           Sign in
         </Button>
       </View>

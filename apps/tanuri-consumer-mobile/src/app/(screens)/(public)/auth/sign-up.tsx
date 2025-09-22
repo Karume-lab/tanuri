@@ -28,31 +28,36 @@ const SignUpScreen = () => {
     mode: "onChange",
   });
 
-  const { error: toastError, success: toastSuccess } = useToast();
-  const { mutate: signUpMutate, isPending: signUpPending } = useSignUp();
-  const { mutate: signInMutate, isPending: signInPending } = useSignIn();
-  const { data: userData } = useUser();
+  const toast = useToast();
+  const signUpMutation = useSignUp();
+  const signIpMutation = useSignIn();
+  const userQuery = useUser();
   const { setSession } = useSession();
 
   const passwordRef = useRef<TextInput>(null);
 
   const handleSignUp: SubmitHandler<SignUpValidation> = (data) => {
-    signUpMutate(data, {
+    signUpMutation.mutate(data, {
       onSuccess: () => {
-        signInMutate(data, {
+        signIpMutation.mutate(data, {
           onSuccess: (data) => {
+            if (!userQuery.data) {
+              return;
+            }
+
             setSession({
-              userId: userData?.id ?? 0,
-              email: userData?.email ?? "",
+              userId: userQuery.data.id,
+              email: userQuery.data.email,
               ...data,
             });
-            toastSuccess("Signed up successfully");
+
+            toast.success("Signed up successfully");
             form.reset();
           },
           onError: (error) => {
             tranformAPIErrorsToArrayOfStrings(error, "signing in").forEach(
               (msg) => {
-                toastError(msg);
+                toast.error(msg);
               },
             );
           },
@@ -61,7 +66,7 @@ const SignUpScreen = () => {
       onError: (error) => {
         tranformAPIErrorsToArrayOfStrings(error, "signing up").forEach(
           (msg) => {
-            toastError(msg);
+            toast.error(msg);
           },
         );
       },
@@ -144,7 +149,7 @@ const SignUpScreen = () => {
 
         <Button
           onPress={form.handleSubmit(handleSignUp)}
-          loading={signUpPending || signInPending}
+          loading={signUpMutation.isPending || signIpMutation.isPending}
         >
           Sign up
         </Button>
