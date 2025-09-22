@@ -12,8 +12,6 @@ const HomeScreen = () => {
   const { clearSession } = useSession();
   const { data } = useUser();
 
-  console.log(data?.id);
-
   return (
     <ScrollView
       style={{ flex: 1 }}
@@ -24,6 +22,7 @@ const HomeScreen = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text>HOME</Text>
+      <Text>{data?.email}</Text>
       <Button onPress={clearSession}>Sign out</Button>
     </ScrollView>
   );

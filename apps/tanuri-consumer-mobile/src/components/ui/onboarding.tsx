@@ -206,7 +206,7 @@ export function Onboarding({
             scrollEnabled={swipeEnabled}
             onMomentumScrollEnd={(event) => {
               const newStep = Math.round(
-                event.nativeEvent.contentOffset.x / screenWidth,
+                event.nativeEvent.contentOffset.x / screenWidth
               );
               setCurrentStep(newStep);
             }}
