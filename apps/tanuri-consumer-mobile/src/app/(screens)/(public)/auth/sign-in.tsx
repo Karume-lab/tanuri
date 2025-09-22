@@ -23,8 +23,8 @@ const SignInScreen = () => {
   const form = useForm<SignInValidation>({
     resolver: zodResolver(signInValidation),
     defaultValues: {
-      email: "danielkarume@outlook.com",
-      password: "hello@Tanuri123",
+      email: "",
+      password: "",
     },
     mode: "onChange",
   });
