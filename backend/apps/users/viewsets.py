@@ -16,12 +16,16 @@ from apps.users.models import (
     DelivererProfileModel,
     UserModel,
 )
-from django.db.models import QuerySet
 
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    queryset = UserModel.objects.all()
+
+    def get_queryset(self) -> Any:
+        user = self.request.user
+        if user.is_staff:
+            return UserModel.objects.all()
+        return UserModel.objects.filter(id=user.pk)
 
 
 class AddressViewSet(viewsets.ModelViewSet):
@@ -39,14 +43,29 @@ class AddressViewSet(viewsets.ModelViewSet):
 
 class CustomerProfileViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerProfileSerializer
-    queryset = CustomerProfileModel.objects.all()
+
+    def get_queryset(self) -> Any:
+        user = self.request.user
+        if user.is_staff:
+            return CustomerProfileModel.objects.all()
+        return CustomerProfileModel.objects.filter(user=user)
 
 
 class DelivererProfileViewSet(viewsets.ModelViewSet):
     serializer_class = DelivererProfileSerializer
-    queryset = DelivererProfileModel.objects.all()
+
+    def get_queryset(self) -> Any:
+        user = self.request.user
+        if user.is_staff:
+            return DelivererProfileModel.objects.all()
+        return DelivererProfileModel.objects.filter(user=user)
 
 
 class AdminProfileViewSet(viewsets.ModelViewSet):
     serializer_class = AdminProfileSerializer
-    queryset = AdminProfileModel.objects.all()
+
+    def get_queryset(self) -> Any:
+        user = self.request.user
+        if user.is_staff:
+            return AdminProfileModel.objects.all()
+        return AdminProfileModel.objects.filter(user=user)
