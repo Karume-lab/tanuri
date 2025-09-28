@@ -41,6 +41,9 @@ THIRD_PARTY_APPS = [
 
 FIRST_PARTY_APPS = [
     "apps.users.apps.UsersConfig",
+    "apps.catalog.apps.CatalogConfig",
+    "apps.orders.apps.OrdersConfig",
+    "apps.payments.apps.PaymentsConfig",
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS + FIRST_PARTY_APPS
