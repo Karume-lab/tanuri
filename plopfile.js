@@ -1,11 +1,10 @@
-import type { NodePlopAPI } from "node-plop";
 import {
   getComponentGeneratorConfig,
   getFeatureGeneratorConfig,
   getPageGeneratorConfig,
-} from "./plop-config/generators.ts";
+} from "./plop-config/generators.js";
 
-const plopper = (plop: NodePlopAPI) => {
+const plopper = (plop) => {
   plop.setGenerator("component", getComponentGeneratorConfig(plop));
   plop.setGenerator("feature", getFeatureGeneratorConfig(plop));
   plop.setGenerator("page", getPageGeneratorConfig(plop));

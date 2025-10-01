@@ -1,15 +1,13 @@
 import { exec } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { NodePlopAPI, PlopGeneratorConfig } from "node-plop";
+// import type { NodePlopAPI, PlopGeneratorConfig } from "node-plop";
 import pluralize from "pluralize";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.join(path.dirname(__filename), "..");
 
-export const getComponentGeneratorConfig = (
-  plop: NodePlopAPI,
-): PlopGeneratorConfig => ({
+export const getComponentGeneratorConfig = (plop) => ({
   description:
     "Generate a new React component in containers, layouts, or presenters for web or mobile",
   prompts: [
@@ -93,9 +91,7 @@ export const getComponentGeneratorConfig = (
   },
 });
 
-export const getFeatureGeneratorConfig = (
-  plop: NodePlopAPI,
-): PlopGeneratorConfig => ({
+export const getFeatureGeneratorConfig = (plop) => ({
   description: "Generate a full feature folder under src/features/",
   prompts: [
     {
@@ -138,7 +134,7 @@ export const getFeatureGeneratorConfig = (
           ...files.map((file) => ({ name: file, value: file, checked: true })),
         ];
       },
-      filter: (input: string[]) => {
+      filter: (input) => {
         const allFiles = [
           "index.ts",
           "components/index.ts",
@@ -169,7 +165,7 @@ export const getFeatureGeneratorConfig = (
       plop.getHelper("lowerCase")(answers.feature),
     );
 
-    const templates: Record<string, string> = {
+    const templates = {
       "index.ts": `// Barrel file for {{pascalCase feature}} feature
 
 // Components
@@ -206,7 +202,7 @@ export * from "./validations";
       "validations/index.ts": "// Validations for {{pascalCase feature}}",
     };
 
-    return answers.parts.map((file: string) => ({
+    return answers.parts.map((file) => ({
       type: "add",
       path: path.join(featureRoot, file),
       template: templates[file],
@@ -215,9 +211,7 @@ export * from "./validations";
   },
 });
 
-export const getPageGeneratorConfig = (
-  plop: NodePlopAPI,
-): PlopGeneratorConfig => ({
+export const getPageGeneratorConfig = (plop) => ({
   description: "Generate a new Next.js App Router page",
   prompts: [
     {
@@ -263,7 +257,7 @@ export const getPageGeneratorConfig = (
     )}`;
     const listPageFile = path.join(appDir, segmentFolder, "page.tsx");
 
-    const actions: PlopGeneratorConfig["actions"] = [
+    const actions = [
       {
         type: "add",
         path: listPageFile,
