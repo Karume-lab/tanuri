@@ -1,7 +1,6 @@
 import { exec } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-// import type { NodePlopAPI, PlopGeneratorConfig } from "node-plop";
 import pluralize from "pluralize";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -162,7 +161,7 @@ export const getFeatureGeneratorConfig = (plop) => ({
       appRoot,
       "src",
       "features",
-      plop.getHelper("lowerCase")(answers.feature),
+      plop.getHelper("kebabCase")(answers.feature),
     );
 
     const templates = {
