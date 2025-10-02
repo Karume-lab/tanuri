@@ -29,7 +29,7 @@ export type ButtonVariant =
   | "ghost"
   | "link";
 
-export type ButtonSize = "default" | "sm" | "lg" | "icon";
+export type ButtonSize = "default" | "sm" | "lg" | "icon" |"xs";
 
 export interface ButtonProps extends Omit<TouchableOpacityProps, "style"> {
   label?: string;
@@ -92,6 +92,9 @@ export const Button = forwardRef<View, ButtonProps>(
 
       // Size variants
       switch (size) {
+        case "xs":
+          Object.assign(baseStyle, { height: 32, paddingHorizontal: 14 });
+          break;
         case "sm":
           Object.assign(baseStyle, { height: 44, paddingHorizontal: 24 });
           break;

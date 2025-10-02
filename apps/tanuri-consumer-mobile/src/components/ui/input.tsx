@@ -24,6 +24,7 @@ export interface InputProps extends Omit<TextInputProps, "style"> {
   icon?: React.ComponentType<LucideProps>;
   rightComponent?: React.ReactNode | (() => React.ReactNode);
   containerStyle?: ViewStyle;
+  inputContainerStyle?: ViewStyle;
   inputStyle?: TextStyle;
   labelStyle?: TextStyle;
   errorStyle?: TextStyle;
@@ -52,6 +53,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       onFocus,
       onBlur,
       placeholder,
+      inputContainerStyle,
       ...props
     },
     ref
@@ -139,7 +141,11 @@ export const Input = forwardRef<TextInput, InputProps>(
       <View style={containerStyle}>
         {/* Input Container */}
         <Pressable
-          style={[getVariantStyle(), disabled && { opacity: 0.6 }]}
+          style={[
+            getVariantStyle(),
+            disabled && { opacity: 0.6 },
+            inputContainerStyle,
+          ]}
           onPress={() => {
             if (!disabled && ref && "current" in ref && ref.current) {
               ref.current.focus();

@@ -12,7 +12,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { BORDER_RADIUS, CORNERS, FONT_SIZE } from "@/styles/theme/globals";
 
 // Types
-type SpinnerSize = "default" | "sm" | "lg" | "icon";
+type SpinnerSize = "default" | "sm" | "lg" | "icon" | "xs";
 export type SpinnerVariant = "default" | "cirlce" | "dots" | "pulse" | "bars";
 
 interface SpinnerProps {
@@ -44,6 +44,7 @@ interface SpinnerConfig {
 
 // Configuration
 const sizeConfig: Record<SpinnerSize, SpinnerConfig> = {
+  xs: { size: 14, iconSize: 14, fontSize: 12, gap: 4, thickness: 1 },
   sm: { size: 16, iconSize: 16, fontSize: 12, gap: 6, thickness: 2 },
   default: {
     size: 24,
