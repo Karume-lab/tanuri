@@ -1,9 +1,6 @@
-from django.urls import include, path, re_path
-from apps.users.router import UserRouter
-
+from django.urls import include, path
 
 urlpatterns = [
-    path("", include(UserRouter.urls)),
-    re_path(r"^auth", include("djoser.urls")),
-    re_path(r"^auth", include("djoser.urls.jwt")),
+    path("auth/", include("djoser.urls")),
+    path("auth/", include("djoser.urls.jwt")),
 ]

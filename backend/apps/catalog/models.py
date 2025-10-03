@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
-    categoryId = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     icon = models.CharField(
         max_length=100,
@@ -17,7 +16,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    productId = models.AutoField(primary_key=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="products"
     )
@@ -29,7 +27,6 @@ class Product(models.Model):
 
 
 class ProductVariant(models.Model):
-    variantId = models.AutoField(primary_key=True)
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="variants"
     )
@@ -48,7 +45,6 @@ class ProductVariant(models.Model):
 
 
 class Offer(models.Model):
-    offerId = models.AutoField(primary_key=True)
     variant = models.ForeignKey(
         ProductVariant, on_delete=models.CASCADE, related_name="offers"
     )
