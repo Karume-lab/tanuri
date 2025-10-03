@@ -1,7 +1,7 @@
 // API queries for Auth
 
 import { useQuery } from "@tanstack/react-query";
-import { protectedApi } from "@/config/kyInstance";
+import { protectedApi } from "@/config/kyInstances";
 import { useSession } from "@/features/auth/hooks/session";
 import type { UserResponse } from "@/features/auth/types";
 import { AUTH_URLS } from "@/features/auth/urls";

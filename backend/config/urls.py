@@ -7,7 +7,7 @@ from config.router import ConfigRouter
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(ConfigRouter.urls)),
-    path("api/users/", include("apps.users.urls")),
+    path("api/", include("apps.users.urls")),
 ]
 
 # Serve media files during development
