@@ -1,10 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text } from "@/components/ui/text";
+import { Button } from "@/components/ui/button";
+import { useSession } from "@/features/auth";
 
 const ProfileScreen = () => {
+  const { clearSession } = useSession();
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Text>Profile</Text>
+      <Button onPress={clearSession} size="sm">
+        Sign out
+      </Button>
     </SafeAreaView>
   );
 };
