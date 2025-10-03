@@ -50,6 +50,9 @@ class CustomerProfileViewSet(viewsets.ModelViewSet):
             return CustomerProfileModel.objects.all()
         return CustomerProfileModel.objects.filter(user=user)
 
+    def perform_create(self, serializer) -> None:
+        serializer.save(user=self.request.user)
+
 
 class DelivererProfileViewSet(viewsets.ModelViewSet):
     serializer_class = DelivererProfileSerializer
