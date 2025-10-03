@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Category(models.Model):
+class CategoryModel(models.Model):
     name = models.CharField(max_length=255)
     icon = models.CharField(
         max_length=100,
@@ -15,9 +15,9 @@ class Category(models.Model):
         return self.name
 
 
-class Product(models.Model):
+class ProductModel(models.Model):
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="products"
+        CategoryModel, on_delete=models.CASCADE, related_name="products"
     )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
@@ -26,9 +26,9 @@ class Product(models.Model):
         return self.name
 
 
-class ProductVariant(models.Model):
+class ProductVariantModel(models.Model):
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="variants"
+        ProductModel, on_delete=models.CASCADE, related_name="variants"
     )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
@@ -44,9 +44,9 @@ class ProductVariant(models.Model):
         return f"{self.product.name} - {self.name}"
 
 
-class Offer(models.Model):
+class OfferModel(models.Model):
     variant = models.ForeignKey(
-        ProductVariant, on_delete=models.CASCADE, related_name="offers"
+        ProductVariantModel, on_delete=models.CASCADE, related_name="offers"
     )
     isActive = models.BooleanField(default=True)
     offerPrice = models.DecimalField(max_digits=10, decimal_places=2)
