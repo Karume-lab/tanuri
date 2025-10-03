@@ -1,17 +1,14 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 from config.router import ConfigRouter
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(ConfigRouter.urls)),
-    re_path(r"^api/auth/", include("djoser.urls")),
-    re_path(r"^api/auth/", include("djoser.urls.jwt")),
+    path("api/users/", include("apps.users.urls")),
 ]
-
 
 # Serve media files during development
 if settings.DEBUG:

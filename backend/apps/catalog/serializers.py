@@ -1,5 +1,24 @@
 from rest_framework import serializers
-from apps.catalog.models import Offer, Product, ProductVariant
+from apps.catalog.models import (
+    OfferModel,
+    ProductModel,
+    ProductVariantModel,
+    CategoryModel,
+)
+
+
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CategoryModel
+        fields = (
+            "url",
+            "id",
+            "name",
+            "icon",
+        )
+        extra_kwargs = {
+            "url": {"view_name": "category-detail"},
+        }
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
@@ -9,7 +28,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     class Meta:
-        model = Product
+        model = ProductModel
         fields = (
             "url",
             "id",
@@ -18,6 +37,9 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             "name",
             "description",
         )
+        extra_kwargs = {
+            "url": {"view_name": "product-detail"},
+        }
 
 
 class ProductVariantSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,7 +53,7 @@ class ProductVariantSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     class Meta:
-        model = ProductVariant
+        model = ProductVariantModel
         fields = (
             "url",
             "id",
@@ -45,11 +67,14 @@ class ProductVariantSerializer(serializers.HyperlinkedModelSerializer):
             "isInStock",
             "images",
         )
+        extra_kwargs = {
+            "url": {"view_name": "product-variant-detail"},
+        }
 
 
 class OfferSerializer(serializers.HyperlinkedModelSerializer):
     variant = serializers.HyperlinkedRelatedField(
-        view_name="productvariant-detail",
+        view_name="product-variant-detail",
         read_only=True,
     )
     user = serializers.HyperlinkedRelatedField(
@@ -58,7 +83,7 @@ class OfferSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     class Meta:
-        model = Offer
+        model = OfferModel
         fields = (
             "url",
             "id",
@@ -69,3 +94,6 @@ class OfferSerializer(serializers.HyperlinkedModelSerializer):
             "startDate",
             "endDate",
         )
+        extra_kwargs = {
+            "url": {"view_name": "offer-detail"},
+        }
