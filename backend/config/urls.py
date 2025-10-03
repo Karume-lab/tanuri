@@ -8,8 +8,6 @@ from config.router import ConfigRouter
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(ConfigRouter.urls)),
-    re_path(r"^api/auth/", include("djoser.urls")),
-    re_path(r"^api/auth/", include("djoser.urls.jwt")),
 ]
 
 
