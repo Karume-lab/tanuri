@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { HTTPError } from "ky";
-import { authApi } from "@/config/kyInstance";
+import { authApi } from "@/config/kyInstances";
 import type {
   SignInError,
   SignInResponse,
