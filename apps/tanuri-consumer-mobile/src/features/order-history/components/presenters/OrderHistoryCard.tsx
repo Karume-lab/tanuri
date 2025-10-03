@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { ChevronRight, TruckElectric } from "lucide-react-native";
 import type React from "react";
 import { TouchableOpacity } from "react-native";
@@ -32,6 +33,7 @@ const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
   orderNumber,
   products,
 }) => {
+  const router = useRouter();
   const borderColor = useThemeColor({}, "border");
   const mutedForeground = useThemeColor({}, "mutedForeground");
 
@@ -45,11 +47,13 @@ const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.8}
+      onPress={() => router.push("/orders/1")}
       style={{
         borderColor,
         borderWidth: 1,
         borderRadius: 12,
         padding: 12,
+        marginBottom: 12,
         flexDirection: "row",
         alignItems: "center",
       }}

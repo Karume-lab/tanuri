@@ -1,4 +1,6 @@
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { TouchableOpacity } from "react-native";
 import { Card, CardContent } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
@@ -16,52 +18,60 @@ const ProductListingCard: React.FC<ProductListingCardProps> = ({
   productPrice,
   productVariant,
 }) => {
+  const router = useRouter();
   return (
-    <Card
-      style={{
-        paddingVertical: 8,
-        paddingHorizontal: 10,
-        borderRadius: 12,
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => {
+        router.push("/products/1");
       }}
     >
-      <CardContent
+      <Card
         style={{
-          gap: 12,
+          paddingVertical: 8,
+          paddingHorizontal: 10,
+          borderRadius: 12,
         }}
       >
-        <View
+        <CardContent
           style={{
-            paddingHorizontal: 10,
-            paddingVertical: 16,
-            borderRadius: 8,
-            backgroundColor: "white",
+            gap: 12,
           }}
         >
-          <Image
-            source={imageUrl}
-            style={{
-              width: 140,
-              height: 105,
-            }}
-          />
-        </View>
-        <View style={{}}>
-          <Text style={[textStyles.normal]}>{productName}</Text>
-          <Text style={[textStyles.smMedium]}>{productVariant}</Text>
           <View
             style={{
-              flexDirection: "row",
-              gap: 6,
-              alignItems: "center",
-              marginTop: 4,
+              paddingHorizontal: 10,
+              paddingVertical: 16,
+              borderRadius: 8,
+              backgroundColor: "white",
             }}
           >
-            <Text style={[textStyles.normal]}>ksh</Text>
-            <Text style={[textStyles.subHeading]}>{productPrice}</Text>
+            <Image
+              source={imageUrl}
+              style={{
+                width: 140,
+                height: 105,
+              }}
+            />
           </View>
-        </View>
-      </CardContent>
-    </Card>
+          <View style={{}}>
+            <Text style={[textStyles.normal]}>{productName}</Text>
+            <Text style={[textStyles.smMedium]}>{productVariant}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 6,
+                alignItems: "center",
+                marginTop: 4,
+              }}
+            >
+              <Text style={[textStyles.normal]}>ksh</Text>
+              <Text style={[textStyles.subHeading]}>{productPrice}</Text>
+            </View>
+          </View>
+        </CardContent>
+      </Card>
+    </TouchableOpacity>
   );
 };
 

@@ -1,5 +1,4 @@
-import { FlatList } from "react-native";
-
+import { FlashList } from "@shopify/flash-list";
 import CartProductCard, {
   type CartProductCardProps,
 } from "../presenters/CartProductCard";
@@ -9,7 +8,7 @@ interface CartListingLayoutProps {
 }
 const CartListingLayout: React.FC<CartListingLayoutProps> = ({ products }) => {
   return (
-    <FlatList
+    <FlashList
       horizontal={false}
       keyExtractor={(item, index) => `${item.productName}-${index}`}
       contentContainerStyle={{

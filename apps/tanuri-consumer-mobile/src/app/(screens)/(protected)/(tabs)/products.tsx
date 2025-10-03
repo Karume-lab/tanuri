@@ -1,23 +1,11 @@
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ScrollView } from "@/components/ui/scroll-view";
-import { Text } from "@/components/ui/text";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ProductListingContainer from "@/features/product-listing/components/containers/ProductListingContainer";
 
 const ProductsScreen = () => {
-  const bottom = useBottomTabBarHeight();
-  const { top: topSafeAreaInset } = useSafeAreaInsets();
-
   return (
-    <ScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{
-        paddingBottom: bottom,
-        paddingTop: topSafeAreaInset,
-      }}
-      showsVerticalScrollIndicator={false}
-    >
-      <Text>PRODUCTS</Text>
-    </ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ProductListingContainer />
+    </SafeAreaView>
   );
 };
 

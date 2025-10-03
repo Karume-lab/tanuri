@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -11,6 +12,7 @@ interface ChecktoutFooterProps {
 }
 
 const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({ buttonText }) => {
+  const router = useRouter();
   return (
     <Card
       style={{
@@ -33,6 +35,7 @@ const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({ buttonText }) => {
           textStyle={{
             textTransform: "capitalize",
           }}
+          onPress={() => router.push("/checkout")}
         >
           {buttonText}
         </Button>

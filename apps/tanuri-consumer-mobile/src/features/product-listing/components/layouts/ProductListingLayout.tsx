@@ -1,8 +1,8 @@
-import { FlatList } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { View } from "@/components/ui/view";
 import ProductListingCard, {
   type ProductListingCardProps,
-} from "./ProductListingCard";
+} from "../presenters/ProductListingCard";
 
 interface ProductListingLayoutProps {
   products: ProductListingCardProps[];
@@ -11,19 +11,19 @@ const ProductListingLayout: React.FC<ProductListingLayoutProps> = ({
   products,
 }) => {
   return (
-    <FlatList
+    <FlashList
       horizontal={false}
       numColumns={2}
-      keyExtractor={(item, index) => `${item.productName}-${index}`}
+      nestedScrollEnabled
       data={products}
-      renderItem={({ item, index }) => {
-        const lastItem = index === products.length - 1;
+      style={{ flex: 1 }}
+      contentContainerStyle={{ flex: 1 }}
+      renderItem={({ item }) => {
         return (
           <View
             style={{
               flex: 1,
               padding: 6,
-              maxWidth: lastItem ? "50%" : "100%",
             }}
           >
             <ProductListingCard

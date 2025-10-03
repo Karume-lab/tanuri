@@ -1,7 +1,6 @@
+import { useRouter } from "expo-router";
 import { ChevronLeft } from "lucide-react-native";
-
 import type React from "react";
-
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
@@ -17,6 +16,7 @@ const ScreenHeader: React.FC<ScreenHeaderProps> = ({
   screenTitle,
   rightSection,
 }) => {
+  const router = useRouter();
   return (
     <View
       style={{
@@ -30,6 +30,7 @@ const ScreenHeader: React.FC<ScreenHeaderProps> = ({
         style={{ flex: 1, height: 32, width: 32 }}
         variant="secondary"
         icon={ChevronLeft}
+        onPress={() => router.back()}
       />
       <Text style={[textStyles.medium, { flex: rightSection ? 1 : 2 }]}>
         {screenTitle}

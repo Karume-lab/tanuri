@@ -40,6 +40,22 @@ const RootLayout = () => {
                   name="(screens)/(protected)/(tabs)"
                   options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                  name="(screens)/(protected)/cart"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="(screens)/(protected)/checkout"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="(screens)/(protected)/products/[id]"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="(screens)/(protected)/orders/[id]"
+                  options={{ headerShown: false }}
+                />
               </Stack.Protected>
               <Stack.Screen name="+not-found" />
             </Stack>
