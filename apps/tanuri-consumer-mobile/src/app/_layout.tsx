@@ -3,11 +3,21 @@ import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ThemeProvider } from "@/styles/theme/theme-provider";
 import "react-native-reanimated";
+import { setBackgroundColorAsync } from "expo-system-ui";
+import { useEffect } from "react";
 import { InitializeAppContainer, ProvidersContainer } from "@/components";
 import { useSession } from "@/features/auth";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 const RootLayout = () => {
   const { isAuthenticated, isOnboarded } = useSession();
+  const backgroundColor = useThemeColor({}, "background");
+  useEffect(() => {
+    const setBackgroundScheme = async () => {
+      await setBackgroundColorAsync(backgroundColor);
+    };
+    setBackgroundScheme();
+  }, [backgroundColor]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
