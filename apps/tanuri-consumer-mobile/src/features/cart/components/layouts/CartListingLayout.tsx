@@ -12,7 +12,6 @@ const CartListingLayout: React.FC<CartListingLayoutProps> = ({ products }) => {
     <FlashList
       horizontal={false}
       keyExtractor={(item, index) => `${item.productName}-${index}`}
-      contentContainerStyle={{ flex: 1 }}
       ItemSeparatorComponent={() => <View style={{ height: 12 }}></View>}
       style={{ flex: 1 }}
       data={products}
