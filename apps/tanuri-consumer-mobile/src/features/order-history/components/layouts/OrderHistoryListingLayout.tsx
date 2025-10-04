@@ -1,4 +1,5 @@
 import { FlashList } from "@shopify/flash-list";
+import { View } from "@/components/ui/view";
 import OrderHistoryCard, {
   DeliveryStatus,
 } from "../presenters/OrderHistoryCard";
@@ -31,7 +32,8 @@ const OrderHistoryListingLayout = () => {
     <FlashList
       data={dummyOrders}
       keyExtractor={(item) => item.orderNumber}
-      contentContainerStyle={{ gap: 16, flex: 1 }}
+      ItemSeparatorComponent={() => <View style={{ height: 12 }}></View>}
+      style={{ flex: 1 }}
       renderItem={({ item }) => <OrderHistoryCard {...item} />}
     />
   );

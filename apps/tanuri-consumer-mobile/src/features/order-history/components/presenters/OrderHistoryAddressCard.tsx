@@ -10,6 +10,7 @@ const OrderHistoryAddressCard = () => {
     <View
       style={{
         borderColor,
+        marginHorizontal: 4,
         borderWidth: 1,
         borderRadius: 8,
         paddingVertical: 12,

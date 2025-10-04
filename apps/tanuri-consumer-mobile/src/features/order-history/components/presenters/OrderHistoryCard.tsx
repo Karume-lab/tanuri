@@ -53,7 +53,6 @@ const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
         borderWidth: 1,
         borderRadius: 12,
         padding: 12,
-        marginBottom: 12,
         flexDirection: "row",
         alignItems: "center",
       }}

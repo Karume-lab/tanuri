@@ -1,6 +1,7 @@
 import { FlashList } from "@shopify/flash-list";
-import { ScrollView } from "@/components/ui/scroll-view";
+import { ScrollView } from "react-native";
 import { SearchBar } from "@/components/ui/searchbar";
+import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import CartButton from "@/features/cart/components/presenters/CartButton";
 import ProductListingLayout from "@/features/product-listing/components/layouts/ProductListingLayout";
@@ -73,29 +74,32 @@ const HomeLayout = () => {
         />
         <CartButton />
       </View>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ gap: 12, flex: 1 }}
-      >
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ gap: 12 }}>
         <SpecialOffersCard
           productCategory={specialOfferConfig.productCategory}
           imageUrl={specialOfferConfig.imageUrl}
           percentageOff={specialOfferConfig.percenageOff}
         />
-        <FlashList
-          horizontal={true}
-          nestedScrollEnabled
-          data={productCardConfig}
-          renderItem={({ item: category }) => {
-            return (
-              <ProductCategoryCard
-                categoryName={category.categoryName}
-                imageUrl={category.imageUrl}
-              />
-            );
-          }}
-        />
-        <ProductListingLayout products={productListingConfig} />
+        <View style={{ gap: 4 }}>
+          <Text style={[textStyles.medium]}>Categories</Text>
+          <FlashList
+            horizontal={true}
+            ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
+            data={productCardConfig}
+            renderItem={({ item: category }) => {
+              return (
+                <ProductCategoryCard
+                  categoryName={category.categoryName}
+                  imageUrl={category.imageUrl}
+                />
+              );
+            }}
+          />
+        </View>
+        <View style={{ flex: 1, gap: 4 }}>
+          <Text style={[textStyles.medium]}>Best selling</Text>
+          <ProductListingLayout products={productListingConfig} />
+        </View>
       </ScrollView>
     </View>
   );

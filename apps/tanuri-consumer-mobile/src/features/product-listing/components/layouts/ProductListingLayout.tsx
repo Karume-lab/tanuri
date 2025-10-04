@@ -12,12 +12,9 @@ const ProductListingLayout: React.FC<ProductListingLayoutProps> = ({
 }) => {
   return (
     <FlashList
-      horizontal={false}
       numColumns={2}
-      nestedScrollEnabled
       data={products}
       style={{ flex: 1 }}
-      contentContainerStyle={{ flex: 1 }}
       renderItem={({ item }) => {
         return (
           <View
@@ -26,12 +23,7 @@ const ProductListingLayout: React.FC<ProductListingLayoutProps> = ({
               padding: 6,
             }}
           >
-            <ProductListingCard
-              imageUrl={item.imageUrl}
-              productName={item.productName}
-              productPrice={item.productPrice}
-              productVariant={item.productVariant}
-            />
+            <ProductListingCard {...item} />
           </View>
         );
       }}

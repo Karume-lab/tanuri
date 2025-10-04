@@ -26,16 +26,20 @@ const OrderHistoryProductListing: React.FC<OrderHistoryProductListingProps> = ({
             }}
           >
             <Text
-              style={[textStyles.medium, { flex: 1, color: mutedForeground }]}
+              style={[
+                textStyles.normal,
+                { flex: 1, color: mutedForeground, fontWeight: "600" },
+              ]}
             >
               {product.name}
             </Text>
             <Text
               style={[
-                textStyles.medium,
+                textStyles.normal,
                 {
-                  flex: 1,
+                  flex: 0.7,
                   textAlign: "center",
+                  fontWeight: "600",
                   color: mutedForeground,
                 },
               ]}
@@ -44,11 +48,12 @@ const OrderHistoryProductListing: React.FC<OrderHistoryProductListingProps> = ({
             </Text>
             <Text
               style={[
-                textStyles.medium,
+                textStyles.normal,
                 {
-                  flex: 1,
+                  flex: 0.7,
                   textAlign: "right",
                   color: mutedForeground,
+                  fontWeight: "600",
                 },
               ]}
             >

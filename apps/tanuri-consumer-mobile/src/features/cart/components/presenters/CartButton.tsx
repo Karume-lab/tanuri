@@ -6,6 +6,7 @@ const CartButton = () => {
   const router = useRouter();
   return (
     <Button
+      variant="ghost"
       size="icon"
       icon={ShoppingCart}
       onPress={() => router.push("/cart")}

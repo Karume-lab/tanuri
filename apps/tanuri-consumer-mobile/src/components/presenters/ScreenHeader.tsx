@@ -27,14 +27,16 @@ const ScreenHeader: React.FC<ScreenHeaderProps> = ({
     >
       <Button
         size="icon"
-        style={{ flex: 1, height: 32, width: 32 }}
+        style={{
+          flex: 0.7,
+          height: 32,
+          width: 32,
+        }}
         variant="secondary"
         icon={ChevronLeft}
         onPress={() => router.back()}
       />
-      <Text style={[textStyles.medium, { flex: rightSection ? 1 : 2 }]}>
-        {screenTitle}
-      </Text>
+      <Text style={[textStyles.medium, { flex: 1 }]}>{screenTitle}</Text>
       {rightSection && rightSection}
     </View>
   );

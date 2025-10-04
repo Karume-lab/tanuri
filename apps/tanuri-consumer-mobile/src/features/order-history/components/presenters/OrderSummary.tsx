@@ -23,15 +23,11 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
       style={{
         backgroundColor: mutedBg,
         borderRadius: 12,
-        paddingVertical: 8,
+        paddingVertical: 12,
+        gap: 4,
       }}
     >
-      <Text
-        style={[
-          textStyles.medium,
-          { textAlign: "center", color: mutedForeground },
-        ]}
-      >
+      <Text style={[textStyles.medium, { textAlign: "center" }]}>
         Order #{orderNumber}
       </Text>
       <Text
