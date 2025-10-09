@@ -38,6 +38,8 @@ THIRD_PARTY_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "djoser",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
 ]
 
 FIRST_PARTY_APPS = [
@@ -156,8 +158,15 @@ REST_FRAMEWORK = {
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Tanuri Backend",
+    "DESCRIPTION": "Tanuri Backend API documentation",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 DJOSER = {
     "TOKEN_MODEL": None,
