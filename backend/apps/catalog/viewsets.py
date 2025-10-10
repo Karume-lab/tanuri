@@ -1,22 +1,47 @@
 from typing import Any
-from rest_framework import viewsets
+
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, viewsets
+
+from apps.catalog.filters import ProductFilter
 from apps.catalog.models import (
+    CategoryModel,
+    OfferModel,
     ProductModel,
     ProductVariantModel,
-    OfferModel,
-    CategoryModel,
 )
 from apps.catalog.serializers import (
+    CategorySerializer,
+    OfferSerializer,
     ProductSerializer,
     ProductVariantSerializer,
-    OfferSerializer,
-    CategorySerializer,
 )
 
 
 class ProductViewSet(viewsets.ModelViewSet):
+
     serializer_class = ProductSerializer
     queryset = ProductModel.objects.all()
+
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_class = ProductFilter
+    search_fields = ["name", "description", "category__name"]
+    ordering_fields = ["name", "id", "category__name", "variants__price"]
+    ordering = ["name"]
+
+    def get_queryset(self) -> Any:
+        user = self.request.user
+
+        queryset = ProductModel.objects.all().distinct()
+
+        if not user.is_staff:
+            queryset = queryset.filter(variants__isInStock=True).distinct()
+
+        return queryset
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

@@ -1,6 +1,7 @@
-from datetime import timedelta
 import os
+from datetime import timedelta
 from pathlib import Path
+
 import environ
 
 env = environ.Env(
@@ -37,6 +38,8 @@ THIRD_PARTY_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "djoser",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
 ]
 
 FIRST_PARTY_APPS = [
@@ -142,6 +145,7 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": False,
 }
 
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -149,8 +153,20 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         # "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Tanuri Backend",
+    "DESCRIPTION": "Tanuri Backend API documentation",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 DJOSER = {
     "TOKEN_MODEL": None,
