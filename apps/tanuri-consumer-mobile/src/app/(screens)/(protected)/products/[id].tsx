@@ -1,11 +1,11 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import ScreenWrapper from "@/components/presenters/PageWrapper";
 import ProductDetailContainer from "@/features/product-detail/components/containers/ProductDetailContainer";
 
 const ProductDetailScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScreenWrapper>
       <ProductDetailContainer />
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 

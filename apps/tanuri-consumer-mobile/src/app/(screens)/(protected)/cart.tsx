@@ -1,11 +1,11 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import ScreenWrapper from "@/components/presenters/PageWrapper";
 import CartContainer from "@/features/cart/components/containers/CartContainer";
 
 const CartScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScreenWrapper>
       <CartContainer />
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 

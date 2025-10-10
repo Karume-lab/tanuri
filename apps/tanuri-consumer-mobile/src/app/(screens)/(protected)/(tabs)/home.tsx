@@ -1,11 +1,11 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import ScreenWrapper from "@/components/presenters/PageWrapper";
 import HomeLayout from "@/features/home/components/layouts/HomeLayout";
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScreenWrapper>
       <HomeLayout />
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 

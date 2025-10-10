@@ -1,11 +1,11 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import ScreenWrapper from "@/components/presenters/PageWrapper";
 import OrderDetailContainer from "@/features/order-history/components/containers/OrderDetailContainer";
 
 const OrderDetail = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScreenWrapper>
       <OrderDetailContainer />
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 
