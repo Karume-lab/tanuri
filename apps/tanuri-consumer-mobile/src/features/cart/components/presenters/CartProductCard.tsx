@@ -7,20 +7,27 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { textStyles } from "@/styles/text";
+import { useCartStore } from "../../store";
 
 export interface CartProductCardProps {
+  productId: number;
   imageUrl: string;
   productPrice: number;
   productName: string;
   productVariant: string;
+  productQuantity: number;
 }
 
 const CartProductCard: React.FC<CartProductCardProps> = ({
+  productId,
   imageUrl,
   productPrice,
   productName,
   productVariant,
+  productQuantity,
 }) => {
+  const { increaseProductQuantity, decreaseProductQuantity, removeProduct } =
+    useCartStore();
   return (
     <View
       style={{
@@ -52,6 +59,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
               alignSelf: "flex-end",
             }}
             icon={Trash2}
+            onPress={() => removeProduct(productId)}
           />
           <Text style={[textStyles.normal]}>{productName}</Text>
           <Text style={[textStyles.smMedium]}>{productVariant}</Text>
@@ -95,13 +103,15 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
                 }}
                 variant="ghost"
                 icon={Minus}
+                onPress={() => decreaseProductQuantity(productId)}
               />
-              <Text style={[textStyles.medium]}>4</Text>
+              <Text style={[textStyles.medium]}>{productQuantity}</Text>
               <Button
                 size="icon"
                 style={{ width: 30, height: "90%" }}
                 variant="ghost"
                 icon={Plus}
+                onPress={() => increaseProductQuantity(productId)}
               />
             </View>
           </Badge>
