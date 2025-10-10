@@ -66,6 +66,18 @@ const RootLayout = () => {
                   name="(screens)/(protected)/orders/[id]"
                   options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                  name="(screens)/(protected)/edit-profile"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="(screens)/(protected)/change-password"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="(screens)/(protected)/shipping-address"
+                  options={{ headerShown: false }}
+                />
               </Stack.Protected>
               <Stack.Screen name="+not-found" />
             </Stack>

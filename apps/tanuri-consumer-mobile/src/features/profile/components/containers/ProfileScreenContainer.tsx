@@ -1,0 +1,64 @@
+import { useRouter } from "expo-router";
+import { UserRoundCheck } from "lucide-react-native";
+import { Icon } from "@/components/ui/icon";
+import { Separator } from "@/components/ui/separator";
+import { Text } from "@/components/ui/text";
+import { View } from "@/components/ui/view";
+import { useSession } from "@/features/auth";
+import { textStyles } from "@/styles/text";
+import ProfileLink from "../presenters/ProfileLink";
+
+const ProfileScreenContainer = () => {
+  const router = useRouter();
+  const { clearSession } = useSession();
+
+  const accountLinksConfig = [
+    {
+      text: "Edit Profile",
+      onPress: () => router.push("/(screens)/(protected)/edit-profile"),
+    },
+    {
+      text: "Change Password",
+      onPress: () => router.push("/(screens)/(protected)/change-password"),
+    },
+    {
+      text: "Shipping Address",
+      onPress: () => router.push("/(screens)/(protected)/shipping-address"),
+    },
+  ];
+
+  return (
+    <View style={{ gap: 20 }}>
+      <View
+        style={{
+          width: 120,
+          aspectRatio: 1,
+          backgroundColor: "white",
+          alignSelf: "center",
+          borderRadius: 999,
+        }}
+      ></View>
+      <View>
+        <View style={{ flexDirection: "row", gap: 12 }}>
+          <Icon name={UserRoundCheck} />
+          <Text style={[textStyles.medium]}>Account</Text>
+        </View>
+        <Separator style={{ marginTop: 16 }} />
+        {accountLinksConfig.map((item, index) => (
+          <ProfileLink key={`${index}-${item.text}`} {...item} />
+        ))}
+      </View>
+      <View>
+        <View style={{ flexDirection: "row", gap: 12 }}>
+          <Icon name={UserRoundCheck} />
+          <Text style={[textStyles.medium]}>More</Text>
+        </View>
+        <Separator style={{ marginTop: 16 }} />
+        <ProfileLink text="About loyalty points" onPress={() => {}} />
+        <ProfileLink text="Sign out" onPress={clearSession} asLink />
+      </View>
+    </View>
+  );
+};
+
+export default ProfileScreenContainer;
