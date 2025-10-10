@@ -106,7 +106,7 @@ const SignUpScreen = () => {
         style={{
           flex: 1,
         }}
-        contentContainerStyle={{ justifyContent: "center", flex: 1, gap: 12 }}
+        contentContainerStyle={{ paddingTop: 20, gap: 12 }}
         keyboardShouldPersistTaps="handled"
       >
         <Controller
