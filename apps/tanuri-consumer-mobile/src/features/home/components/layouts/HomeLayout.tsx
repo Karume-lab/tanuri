@@ -1,62 +1,16 @@
-import { FlashList } from "@shopify/flash-list";
 import { ScrollView } from "react-native";
 import { SearchBar } from "@/components/ui/searchbar";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import CartButton from "@/features/cart/components/presenters/CartButton";
+import ProductCategoiesListingLayout from "@/features/product-listing/components/layouts/ProductCategoiesListingLayout";
 import ProductListingLayout from "@/features/product-listing/components/layouts/ProductListingLayout";
-import type { ProductListingCardProps } from "@/features/product-listing/components/presenters/ProductListingCard";
+import { useProductFilteringStore } from "@/features/product-listing/store";
 import { textStyles } from "@/styles/text";
-import ProductCategoryCard from "../presenters/ProductCategoryCard";
 import SpecialOffersCard from "../presenters/SpecialOffersCard";
 
 const HomeLayout = () => {
-  const productCardConfig = [
-    {
-      imageUrl: require("public/assets/burners.png"),
-      categoryName: "burners",
-    },
-    {
-      imageUrl: require("public/assets/cylinders.png"),
-      categoryName: "cylinders",
-    },
-    {
-      imageUrl: require("public/assets/regulator.png"),
-      categoryName: "regulators",
-    },
-  ];
-  const productListingConfig: ProductListingCardProps[] = [
-    {
-      imageUrl: require("public/assets/burners.png"),
-      productName: "Wells gas",
-      productPrice: 1200,
-      productVariant: "6 kg",
-    },
-    {
-      imageUrl: require("public/assets/burners.png"),
-      productName: "Wells gas",
-      productPrice: 1200,
-      productVariant: "6 kg",
-    },
-    {
-      imageUrl: require("public/assets/cylinders.png"),
-      productName: "Wells gas",
-      productPrice: 1200,
-      productVariant: "6 kg",
-    },
-    {
-      imageUrl: require("public/assets/cylinders.png"),
-      productName: "Wells gas",
-      productPrice: 1200,
-      productVariant: "6 kg",
-    },
-    {
-      imageUrl: require("public/assets/cylinders.png"),
-      productName: "Wells gas",
-      productPrice: 1200,
-      productVariant: "6 kg",
-    },
-  ];
+  const { setSearch } = useProductFilteringStore();
 
   const specialOfferConfig = {
     imageUrl: require("public/assets/cylinders.png"),
@@ -70,6 +24,7 @@ const HomeLayout = () => {
         <SearchBar
           placeholder="What are you looking for"
           inputStyle={[textStyles.normal]}
+          onSearch={setSearch}
           containerStyle={{ flex: 1 }}
         />
         <CartButton />
@@ -80,25 +35,19 @@ const HomeLayout = () => {
           imageUrl={specialOfferConfig.imageUrl}
           percentageOff={specialOfferConfig.percenageOff}
         />
-        <View style={{ gap: 4 }}>
+        <View
+          style={{
+            gap: 4,
+          }}
+        >
           <Text style={[textStyles.medium]}>Categories</Text>
-          <FlashList
-            horizontal={true}
-            ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
-            data={productCardConfig}
-            renderItem={({ item: category }) => {
-              return (
-                <ProductCategoryCard
-                  categoryName={category.categoryName}
-                  imageUrl={category.imageUrl}
-                />
-              );
-            }}
-          />
+          <View>
+            <ProductCategoiesListingLayout />
+          </View>
         </View>
         <View style={{ flex: 1, gap: 4 }}>
           <Text style={[textStyles.medium]}>Best selling</Text>
-          <ProductListingLayout products={productListingConfig} />
+          <ProductListingLayout />
         </View>
       </ScrollView>
     </View>

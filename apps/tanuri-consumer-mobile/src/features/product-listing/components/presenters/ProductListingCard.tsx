@@ -5,15 +5,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { textStyles } from "@/styles/text";
+import type { Variant } from "../../types";
 
 export interface ProductListingCardProps {
-  imageUrl: string;
   productName: string;
   productPrice: number;
-  productVariant: string;
+  productVariant: Variant[];
 }
 const ProductListingCard: React.FC<ProductListingCardProps> = ({
-  imageUrl,
   productName,
   productPrice,
   productVariant,
@@ -47,7 +46,7 @@ const ProductListingCard: React.FC<ProductListingCardProps> = ({
             }}
           >
             <Image
-              source={imageUrl}
+              source={productVariant[0]?.images[0] || ""}
               style={{
                 width: 140,
                 height: 105,
@@ -55,8 +54,16 @@ const ProductListingCard: React.FC<ProductListingCardProps> = ({
             />
           </View>
           <View style={{}}>
-            <Text style={[textStyles.normal]}>{productName}</Text>
-            <Text style={[textStyles.smMedium]}>{productVariant}</Text>
+            <Text
+              style={[textStyles.normal]}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {productName}
+            </Text>
+            <Text style={[textStyles.smMedium]}>
+              {productVariant[0]?.name || "no variants"}
+            </Text>
             <View
               style={{
                 flexDirection: "row",
