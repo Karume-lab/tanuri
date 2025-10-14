@@ -28,7 +28,7 @@ class ProductModel(models.Model):
 
 class ProductVariantModel(models.Model):
     product = models.ForeignKey(
-        ProductModel, on_delete=models.CASCADE, related_name="variants"
+        "catalog.ProductModel", on_delete=models.CASCADE, related_name="variants"
     )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
@@ -38,10 +38,19 @@ class ProductVariantModel(models.Model):
     )
     stockQuantity = models.PositiveIntegerField(default=0)
     isInStock = models.BooleanField(default=True)
-    images = models.JSONField(blank=True, default=list)
 
     def __str__(self):
         return f"{self.product.name} - {self.name}"
+
+
+class ProductVariantImageModel(models.Model):
+    variant = models.ForeignKey(
+        ProductVariantModel, on_delete=models.CASCADE, related_name="images"
+    )
+    image = models.ImageField(upload_to="product-variant-images/")
+
+    def __str__(self):
+        return f"Image for {self.variant.name}"
 
 
 class OfferModel(models.Model):
