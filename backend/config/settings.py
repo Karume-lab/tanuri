@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
 ]
 
 FIRST_PARTY_APPS = [
+    "apps.core.apps.CoreConfig",
     "apps.users.apps.UsersConfig",
     "apps.catalog.apps.CatalogConfig",
     "apps.orders.apps.OrdersConfig",
