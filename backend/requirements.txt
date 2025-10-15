@@ -13,6 +13,7 @@ djangorestframework_simplejwt==5.5.1
 djoser==2.3.3
 drf-spectacular==0.28.0
 drf-spectacular-sidecar==2025.10.1
+Faker==37.11.0
 idna==3.10
 inflection==0.5.1
 jsonschema==4.25.1
@@ -31,5 +32,6 @@ rpds-py==0.27.1
 social-auth-app-django==5.5.1
 social-auth-core==4.7.0
 sqlparse==0.5.3
+tzdata==2025.2
 uritemplate==4.2.0
 urllib3==2.5.0

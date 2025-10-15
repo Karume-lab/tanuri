@@ -1,8 +1,5 @@
 from typing import Any
 
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, viewsets
-
 from apps.catalog.filters import ProductFilter
 from apps.catalog.models import (
     CategoryModel,
@@ -16,6 +13,8 @@ from apps.catalog.serializers import (
     ProductSerializer,
     ProductVariantSerializer,
 )
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, parsers, viewsets
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -51,15 +50,14 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class ProductVariantViewSet(viewsets.ModelViewSet):
     serializer_class = ProductVariantSerializer
+    queryset = ProductVariantModel.objects.all()
+    parser_classes = [parsers.MultiPartParser, parsers.FormParser, parsers.JSONParser]
 
     def get_queryset(self) -> Any:
         user = self.request.user
         if user.is_staff:
             return ProductVariantModel.objects.all()
-        return ProductVariantModel.objects.filter(user=user)
-
-    def perform_create(self, serializer):
-        serializer.save(creator=self.request.user)
+        return ProductVariantModel.objects.all()
 
 
 class OfferViewSet(viewsets.ModelViewSet):
