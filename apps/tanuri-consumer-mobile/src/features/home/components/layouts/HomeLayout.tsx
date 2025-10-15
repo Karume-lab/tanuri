@@ -41,9 +41,8 @@ const HomeLayout = () => {
           }}
         >
           <Text style={[textStyles.medium]}>Categories</Text>
-          <View>
-            <ProductCategoiesListingLayout />
-          </View>
+          <View></View>
+          <ProductCategoiesListingLayout />
         </View>
         <View style={{ flex: 1, gap: 4 }}>
           <Text style={[textStyles.medium]}>Best selling</Text>

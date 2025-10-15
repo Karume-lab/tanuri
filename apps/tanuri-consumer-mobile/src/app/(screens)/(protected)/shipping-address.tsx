@@ -1,10 +1,10 @@
 import ScreenWrapper from "@/components/presenters/PageWrapper";
-import { Text } from "@/components/ui/text";
+import ShippingAddressContainer from "@/features/profile/components/containers/ShippingAddressContainer";
 
 const ShippingAddress = () => {
   return (
     <ScreenWrapper>
-      <Text>Shipping Address</Text>
+      <ShippingAddressContainer />
     </ScreenWrapper>
   );
 };
