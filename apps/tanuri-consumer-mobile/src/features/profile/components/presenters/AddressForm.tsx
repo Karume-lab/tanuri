@@ -4,10 +4,15 @@ import { Switch, View } from "react-native";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
-import { type AddressValidation, addressValidation } from "../../validations";
+import { useCreateAddress } from "../../hooks/api/mutations";
+import { type Address, addressValidation } from "../../validations";
 
 const AddressForm = () => {
-  const { control, handleSubmit } = useForm<AddressValidation>({
+  const {
+    control,
+    handleSubmit,
+    reset: resetForm,
+  } = useForm<Address>({
     resolver: zodResolver(addressValidation),
     defaultValues: {
       label: "",
@@ -15,11 +20,12 @@ const AddressForm = () => {
       isDefault: false,
     },
   });
+  const { mutateAsync: createAddress, isPending } = useCreateAddress();
 
   // const isDefault = watch("isDefault");
 
-  const onSubmit = (data: AddressValidation) => {
-    console.log(data);
+  const onSubmit = (data: Address) => {
+    createAddress(data).then(resetForm);
   };
 
   return (
@@ -116,7 +122,9 @@ const AddressForm = () => {
         )}
       />
 
-      <Button onPress={handleSubmit(onSubmit)}>Create Address</Button>
+      <Button onPress={handleSubmit(onSubmit)} loading={isPending}>
+        Create Address
+      </Button>
     </View>
   );
 };

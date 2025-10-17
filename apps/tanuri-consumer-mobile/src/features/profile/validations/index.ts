@@ -7,4 +7,4 @@ export const addressValidation = z.object({
   isDefault: z.boolean(),
 });
 
-export type AddressValidation = z.infer<typeof addressValidation>;
+export type Address = z.infer<typeof addressValidation>;

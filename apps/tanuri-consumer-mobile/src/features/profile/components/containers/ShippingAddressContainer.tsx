@@ -1,19 +1,16 @@
-import { Text } from "@/components/ui/text";
-import { View } from "@/components/ui/view";
+import ScreenHeader from "@/components/presenters/ScreenHeader";
+import AddressListingLayout from "../layouts/AddressListingLayout";
 import AddressBottomSheet from "../presenters/AddressBottomSheet";
 
 const ShippingAddressContainer = () => {
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      <Text>Shipping Address</Text>
-      <AddressBottomSheet />
-    </View>
+    <>
+      <ScreenHeader
+        screenTitle="Shipping Address"
+        rightSection={<AddressBottomSheet />}
+      />
+      <AddressListingLayout />
+    </>
   );
 };
 
