@@ -15,7 +15,7 @@ export const getComponentGeneratorConfig = (plop) => ({
       name: "app",
       message: "Which app do you want to scaffold into?",
       choices: [
-        { name: "Company Web", value: "tanuri-company-web" },
+        { name: "Web Site", value: "tanuri-website" },
         { name: "Consumer Mobile", value: "tanuri-consumer-mobile" },
       ],
     },
@@ -98,7 +98,7 @@ export const getFeatureGeneratorConfig = (plop) => ({
       name: "app",
       message: "Which app do you want to scaffold into?",
       choices: [
-        { name: "Company Web", value: "tanuri-company-web" },
+        { name: "Company Web", value: "tanuri-website" },
         { name: "Consumer Mobile", value: "tanuri-consumer-mobile" },
       ],
     },
@@ -246,7 +246,7 @@ export const getPageGeneratorConfig = (plop) => ({
 
     const { access, name, withLayout, withDynamicRoute } = answers;
 
-    const appRoot = path.join(__dirname, "apps/tanuri-company-web");
+    const appRoot = path.join(__dirname, "apps/tanuri-website");
     const appDir = path.join(appRoot, "src/app");
     const templatesRoot = path.join(appRoot, "scaffold-templates/pages");
 
