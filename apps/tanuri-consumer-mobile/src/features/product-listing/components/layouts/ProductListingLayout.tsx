@@ -11,10 +11,12 @@ const ProductListingLayout = () => {
   const { data, isPending, isError, error } = useProducts();
 
   const products: ProductListingCardProps[] | undefined = data?.map((item) => ({
+    productId: item.id,
     productName: item.name,
     productPrice: parseInt(item.variants[0].price, 10),
-    productVariant: [],
+    defaultVariant: item.variants[0],
   }));
+
   return (
     <FlashList
       numColumns={2}

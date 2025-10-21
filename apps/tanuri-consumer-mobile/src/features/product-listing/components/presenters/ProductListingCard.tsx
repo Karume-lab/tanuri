@@ -8,21 +8,24 @@ import { textStyles } from "@/styles/text";
 import type { Variant } from "../../types";
 
 export interface ProductListingCardProps {
+  productId: number;
   productName: string;
   productPrice: number;
-  productVariant: Variant[];
+  defaultVariant: Variant;
 }
 const ProductListingCard: React.FC<ProductListingCardProps> = ({
+  productId,
   productName,
   productPrice,
-  productVariant,
+  defaultVariant,
 }) => {
   const router = useRouter();
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => {
-        router.push("/products/1");
+        router.push(`/products/${productId}`);
       }}
     >
       <Card
@@ -46,7 +49,8 @@ const ProductListingCard: React.FC<ProductListingCardProps> = ({
             }}
           >
             <Image
-              source={productVariant[0]?.images[0] || ""}
+              source={defaultVariant.images[0].image}
+              contentFit="contain"
               style={{
                 width: 140,
                 height: 105,
@@ -62,7 +66,7 @@ const ProductListingCard: React.FC<ProductListingCardProps> = ({
               {productName}
             </Text>
             <Text style={[textStyles.smMedium]}>
-              {productVariant[0]?.name || "no variants"}
+              {defaultVariant.name || "no variants"}
             </Text>
             <View
               style={{

@@ -9,7 +9,10 @@ export type Variant = {
   tradeInPrice: string;
   stockQuantity: number;
   isInStock: boolean;
-  images: string;
+  images: {
+    id: number;
+    image: string;
+  }[];
 };
 
 export type Product = {
