@@ -7,16 +7,10 @@ import ProductCategoiesListingLayout from "@/features/product-listing/components
 import ProductListingLayout from "@/features/product-listing/components/layouts/ProductListingLayout";
 import { useProductFilteringStore } from "@/features/product-listing/store";
 import { textStyles } from "@/styles/text";
-import SpecialOffersCard from "../presenters/SpecialOffersCard";
+import SpecialOffersListingLayout from "./SpecialOffersListingLayout";
 
 const HomeLayout = () => {
   const { setSearch } = useProductFilteringStore();
-
-  const specialOfferConfig = {
-    imageUrl: require("public/assets/cylinders.png"),
-    productCategory: "cylinders",
-    percenageOff: 30,
-  };
 
   return (
     <View style={{ flex: 1, gap: 12 }}>
@@ -29,12 +23,13 @@ const HomeLayout = () => {
         />
         <CartButton />
       </View>
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ gap: 12 }}>
-        <SpecialOffersCard
-          productCategory={specialOfferConfig.productCategory}
-          imageUrl={specialOfferConfig.imageUrl}
-          percentageOff={specialOfferConfig.percenageOff}
-        />
+      <ScrollView
+        style={{ flex: 1 }}
+        nestedScrollEnabled
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ gap: 12 }}
+      >
+        <SpecialOffersListingLayout />
         <View
           style={{
             gap: 4,
