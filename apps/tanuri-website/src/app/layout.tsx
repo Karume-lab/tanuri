@@ -1,3 +1,4 @@
+import { BackToTopButton, Footer, Navbar } from "@/components";
 import "@/styles/global.css";
 
 import type { Metadata } from "next";
@@ -13,7 +14,12 @@ interface RootLayoutProps extends Readonly<{ children: ReactNode }> {}
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Navbar />
+        {children}
+        <BackToTopButton />
+        <Footer />
+      </body>
     </html>
   );
 };
