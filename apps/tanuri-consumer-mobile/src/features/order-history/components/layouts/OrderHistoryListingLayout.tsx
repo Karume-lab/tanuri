@@ -7,23 +7,31 @@ import OrderHistoryCard, {
 const OrderHistoryListingLayout = () => {
   const dummyOrders = [
     {
-      deliveryDate: "2025-09-25",
-      orderNumber: "12345",
+      deliveryDate: "2025-01-15",
+      orderNumber: "LPG001",
       deliveryStatus: DeliveryStatus.delivered,
       products: [
-        { id: 1, name: "Apples", quantity: 2, cost: 200 },
-        { id: 2, name: "Bananas", quantity: 5, cost: 150 },
-        { id: 3, name: "Oranges", quantity: 3, cost: 300 },
+        { id: 1, name: "Wells Gas Cylinder 6kg", quantity: 2, cost: 2400 },
+        { id: 2, name: "Regulator Pro", quantity: 1, cost: 800 },
+        { id: 3, name: "Gas Hose 2m", quantity: 2, cost: 600 },
       ],
     },
     {
-      deliveryDate: "2025-09-28",
-      orderNumber: "67890",
+      deliveryDate: "2025-01-18",
+      orderNumber: "LPG002",
       deliveryStatus: DeliveryStatus.inProgress,
       products: [
-        { id: 4, name: "Milk", quantity: 1, cost: 120 },
-        { id: 5, name: "Bread", quantity: 2, cost: 80 },
-        { id: 6, name: "Eggs", quantity: 12, cost: 240 },
+        { id: 4, name: "Wells Gas Cylinder 12kg", quantity: 1, cost: 3500 },
+        { id: 5, name: "Burner Deluxe", quantity: 1, cost: 1200 },
+      ],
+    },
+    {
+      deliveryDate: "2025-01-12",
+      orderNumber: "LPG003",
+      deliveryStatus: DeliveryStatus.delivered,
+      products: [
+        { id: 6, name: "K-Gas Cylinder 6kg", quantity: 3, cost: 3600 },
+        { id: 7, name: "Safety Valve Kit", quantity: 1, cost: 450 },
       ],
     },
   ];

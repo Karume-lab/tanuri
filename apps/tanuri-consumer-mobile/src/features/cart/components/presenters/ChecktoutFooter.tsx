@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -6,13 +5,18 @@ import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { textStyles } from "@/styles/text";
+import { useCartStore } from "../../store";
 
 interface ChecktoutFooterProps {
   buttonText: string;
+  onButtonPress: () => void;
 }
 
-const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({ buttonText }) => {
-  const router = useRouter();
+const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({
+  buttonText,
+  onButtonPress,
+}) => {
+  const { totalCost: subTotal } = useCartStore();
   return (
     <Card
       style={{
@@ -24,10 +28,10 @@ const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({ buttonText }) => {
       }}
     >
       <CardContent style={{ gap: 8 }}>
-        <FooterSection title={"Subtotal"} price={5000} />
+        <FooterSection title={"Subtotal"} price={subTotal} />
         <FooterSection title={"Shipping fee"} price={100} />
         <Separator />
-        <FooterSection title={"Total"} price={5100} />
+        <FooterSection title={"Total"} price={subTotal + 100} />
       </CardContent>
       <CardFooter style={{ alignSelf: "center" }}>
         <Button
@@ -35,7 +39,7 @@ const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({ buttonText }) => {
           textStyle={{
             textTransform: "capitalize",
           }}
-          onPress={() => router.push("/checkout")}
+          onPress={onButtonPress}
         >
           {buttonText}
         </Button>

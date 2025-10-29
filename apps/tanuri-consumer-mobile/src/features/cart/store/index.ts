@@ -7,6 +7,7 @@ import type { Product } from "../types";
 interface CartStoreState {
   products: Product[];
   productsCount: number;
+  totalCost: number;
 }
 
 interface CartStoreActions {
@@ -22,6 +23,7 @@ export const useCartStore = create<CartStoreState & CartStoreActions>()(
     (set) => ({
       products: [],
       productsCount: 0,
+      totalCost: 0,
 
       addProduct: (product) => {
         set((state) => {
@@ -43,7 +45,16 @@ export const useCartStore = create<CartStoreState & CartStoreActions>()(
             0,
           );
 
-          return { products: updatedProducts, productsCount: count };
+          const totalCost = updatedProducts.reduce(
+            (acc, p) => acc + p.productPrice * p.productQuantity,
+            0,
+          );
+
+          return {
+            products: updatedProducts,
+            productsCount: count,
+            totalCost,
+          };
         });
       },
 
@@ -54,11 +65,22 @@ export const useCartStore = create<CartStoreState & CartStoreActions>()(
               ? { ...p, productQuantity: p.productQuantity + 1 }
               : p,
           );
+
           const count = updatedProducts.reduce(
             (acc, p) => acc + p.productQuantity,
             0,
           );
-          return { products: updatedProducts, productsCount: count };
+
+          const totalCost = updatedProducts.reduce(
+            (acc, p) => acc + p.productPrice * p.productQuantity,
+            0,
+          );
+
+          return {
+            products: updatedProducts,
+            productsCount: count,
+            totalCost,
+          };
         });
       },
 
@@ -81,7 +103,16 @@ export const useCartStore = create<CartStoreState & CartStoreActions>()(
             0,
           );
 
-          return { products: updatedProducts, productsCount: count };
+          const totalCost = updatedProducts.reduce(
+            (acc, p) => acc + p.productPrice * p.productQuantity,
+            0,
+          );
+
+          return {
+            products: updatedProducts,
+            productsCount: count,
+            totalCost,
+          };
         });
       },
 
@@ -90,15 +121,31 @@ export const useCartStore = create<CartStoreState & CartStoreActions>()(
           const updatedProducts = state.products.filter(
             (product) => product.id !== productId,
           );
+
           const count = updatedProducts.reduce(
             (acc, p) => acc + p.productQuantity,
             0,
           );
-          return { products: updatedProducts, productsCount: count };
+
+          const totalCost = updatedProducts.reduce(
+            (acc, p) => acc + p.productPrice * p.productQuantity,
+            0,
+          );
+
+          return {
+            products: updatedProducts,
+            productsCount: count,
+            totalCost,
+          };
         });
       },
 
-      clearCart: () => set({ products: [], productsCount: 0 }),
+      clearCart: () =>
+        set({
+          products: [],
+          productsCount: 0,
+          totalCost: 0,
+        }),
     }),
     {
       name: "cart-store",

@@ -7,7 +7,7 @@ import ProductCategoryCard, {
   type ProductCategoryCardProps,
 } from "../presenters/ProductCategoryCard";
 
-const ProductCategoiesListingLayout = () => {
+const ProductCategoriesListingLayout = () => {
   const { data, isPending, isError, error } = useCategories();
   const productCardConfig: ProductCategoryCardProps[] | undefined = data?.map(
     (category) => ({
@@ -19,6 +19,7 @@ const ProductCategoiesListingLayout = () => {
   return (
     <FlashList
       horizontal={true}
+      style={{ height: 80 }}
       ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
       ListEmptyComponent={
         isPending ? (
@@ -43,4 +44,4 @@ const ProductCategoiesListingLayout = () => {
   );
 };
 
-export default ProductCategoiesListingLayout;
+export default ProductCategoriesListingLayout;

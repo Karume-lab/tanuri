@@ -3,10 +3,11 @@ import { SearchBar } from "@/components/ui/searchbar";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import CartButton from "@/features/cart/components/presenters/CartButton";
-import ProductCategoiesListingLayout from "@/features/product-listing/components/layouts/ProductCategoiesListingLayout";
+import ProductCategoriesListingLayout from "@/features/product-listing/components/layouts/ProductCategoriesListingLayout";
 import ProductListingLayout from "@/features/product-listing/components/layouts/ProductListingLayout";
 import { useProductFilteringStore } from "@/features/product-listing/store";
 import { textStyles } from "@/styles/text";
+import Greeter from "../presenters/greeter";
 import SpecialOffersListingLayout from "./SpecialOffersListingLayout";
 
 const HomeLayout = () => {
@@ -14,6 +15,7 @@ const HomeLayout = () => {
 
   return (
     <View style={{ flex: 1, gap: 12 }}>
+      <Greeter />
       <View style={{ flexDirection: "row", gap: 20 }}>
         <SearchBar
           placeholder="What are you looking for"
@@ -36,8 +38,7 @@ const HomeLayout = () => {
           }}
         >
           <Text style={[textStyles.medium]}>Categories</Text>
-          <View></View>
-          <ProductCategoiesListingLayout />
+          <ProductCategoriesListingLayout />
         </View>
         <View style={{ flex: 1, gap: 4 }}>
           <Text style={[textStyles.medium]}>Best selling</Text>

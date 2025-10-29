@@ -1,11 +1,11 @@
-import React from "react";
-import { Text, View } from "react-native";
+import ScreenWrapper from "@/components/presenters/PageWrapper";
+import CheckoutContainer from "@/features/checktout/components/containers/CheckoutContainer";
 
 const CheckoutScreen = () => {
   return (
-    <View>
-      <Text>CheckoutScreen</Text>
-    </View>
+    <ScreenWrapper>
+      <CheckoutContainer />
+    </ScreenWrapper>
   );
 };
 

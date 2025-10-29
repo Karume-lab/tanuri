@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { ShoppingCart } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import ScreenHeader from "@/components/presenters/ScreenHeader";
@@ -17,6 +17,7 @@ import ProductDetailInfo from "../presenters/ProductDetailInfo";
 const ProductDetailContainer = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { addProduct } = useCartStore();
+  const router = useRouter();
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null,
   );
@@ -55,11 +56,10 @@ const ProductDetailContainer = () => {
   };
 
   const currentImages = selectedVariant?.images || [];
-  console.log("current images", currentImages);
 
   if (isPending) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1 }}>
         <ScreenHeader screenTitle="Loading..." rightSection={<CartButton />} />
         <Spinner />
       </View>
@@ -119,6 +119,10 @@ const ProductDetailContainer = () => {
               opacity: canAddToCart ? 1 : 0.5,
             }}
             disabled={!canAddToCart}
+            onPress={() => {
+              handleAddToCart();
+              router.push("/checkout");
+            }}
           >
             Buy now
           </Button>

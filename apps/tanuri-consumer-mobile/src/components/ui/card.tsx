@@ -25,7 +25,7 @@ export function Card({ children, style }: CardProps) {
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.05,
           shadowRadius: 3,
-          elevation: 2,
+          elevation: 0,
         },
         style,
       ]}

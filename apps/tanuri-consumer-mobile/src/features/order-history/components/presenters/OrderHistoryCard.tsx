@@ -72,10 +72,10 @@ const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
             {deliveryDate}
           </Text>
         </View>
-        <Text style={[textStyles.medium]} numberOfLines={1}>
+        <Text style={[textStyles.smMedium]} numberOfLines={1}>
           {productNames}
         </Text>
-        <Text style={[textStyles.large]}>ksh {totalCost}</Text>
+        <Text style={[textStyles.medium]}>ksh {totalCost}</Text>
 
         <View
           style={{

@@ -16,11 +16,13 @@ const ProfileScreenContainer = () => {
   const accountLinksConfig = [
     {
       text: "Edit Profile",
-      onPress: () => router.push("/(screens)/(protected)/edit-profile"),
+      // onPress: () => router.push("/(screens)/(protected)/edit-profile"),
+      onPress: () => {},
     },
     {
       text: "Change Password",
-      onPress: () => router.push("/(screens)/(protected)/change-password"),
+      // onPress: () => router.push("/(screens)/(protected)/change-password"),
+      onPress: () => {},
     },
     {
       text: "Shipping Address",

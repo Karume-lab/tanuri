@@ -21,7 +21,6 @@ const ProductListingLayout = () => {
     <FlashList
       numColumns={2}
       data={products}
-      style={{ flex: 1 }}
       ListEmptyComponent={
         isPending ? (
           <Spinner />

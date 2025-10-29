@@ -41,7 +41,7 @@ const SpecialOffersCard: React.FC<SpecialOffersCardProps> = ({
           <View
             style={{
               flexDirection: "row",
-              alignItems: "flex-start",
+              alignItems: "center",
               gap: 8,
             }}
           >

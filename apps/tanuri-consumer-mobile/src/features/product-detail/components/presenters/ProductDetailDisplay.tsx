@@ -1,7 +1,6 @@
 import { Image } from "expo-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselItem } from "@/components/ui/carousel";
-import { View } from "@/components/ui/view";
 
 interface ProductDetailDisplayProps {
   images: {
@@ -29,25 +28,24 @@ const ProductDetailDisplay: React.FC<ProductDetailDisplayProps> = ({
         }}
       >
         {images.length > 1 ? (
-          <Carousel showIndicators={true} autoPlay={false} loop={false}>
+          <Carousel
+            showIndicators={true}
+            autoPlay={false}
+            loop={false}
+            style={{
+              flex: 1,
+            }}
+          >
             {images.map(({ image, id }) => (
-              <CarouselItem key={id}>
-                <View
+              <CarouselItem key={id} style={{ flex: 1 }}>
+                <Image
+                  source={image}
+                  contentFit="contain"
                   style={{
                     flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
+                    aspectRatio: 1,
                   }}
-                >
-                  <Image
-                    source={image}
-                    contentFit="contain"
-                    style={{
-                      flex: 1,
-                      aspectRatio: 1,
-                    }}
-                  />
-                </View>
+                />
               </CarouselItem>
             ))}
           </Carousel>

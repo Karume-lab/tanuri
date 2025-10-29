@@ -7,7 +7,6 @@ import ProfileAddressCard from "../presenters/ProfileAddressCard";
 
 const AddressListingLayout = () => {
   const { data, isPending, isError, error } = useGetAddresses();
-  console.log(data);
   return (
     <FlashList
       data={data}
