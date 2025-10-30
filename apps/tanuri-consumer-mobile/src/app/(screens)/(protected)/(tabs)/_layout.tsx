@@ -2,7 +2,7 @@ import { PlatformPressable } from "@react-navigation/elements";
 import { BlurView } from "expo-blur";
 import * as Haptics from "expo-haptics";
 import { Tabs } from "expo-router";
-import { Home, ShoppingBag } from "lucide-react-native";
+import { FileClock, Home, ShoppingBag, User } from "lucide-react-native";
 import { Platform, StyleSheet } from "react-native";
 import { Icon } from "@/components/ui/icon";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -66,6 +66,25 @@ const TabsLayout = () => {
           title: "Products",
           tabBarIcon: ({ color }) => (
             <Icon name={ShoppingBag} size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="orders"
+        options={{
+          title: "Orders",
+          tabBarIcon: ({ color }) => (
+            <Icon name={FileClock} size={24} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <Icon name={User} size={24} color={color} />
           ),
         }}
       />

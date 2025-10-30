@@ -1,13 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Image } from "expo-image";
 import { Mail } from "lucide-react-native";
 import { useRef } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { PasswordInput } from "@/components";
+import { AvoidKeyboard } from "@/components/ui/avoid-keyboard";
 import { Button } from "@/components/ui/button";
-import { Image } from "@/components/ui/image";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
+import { ScrollView } from "@/components/ui/scroll-view";
 import { Text } from "@/components/ui/text";
 import { useToast } from "@/components/ui/toast";
 import { View } from "@/components/ui/view";
@@ -53,35 +57,47 @@ const SignInScreen = () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
-        display: "flex",
-        gap: 200,
+        flex: 1,
+        paddingTop: 30,
+        justifyContent: "space-between",
         paddingHorizontal: 8,
-        paddingVertical: 64,
         alignItems: "center",
-        height: "100%",
       }}
     >
-      <View style={{ width: 200, height: 200 }}>
-        <Image
-          source={require("public/core/icon.png")}
-          width={200}
-          containerStyle={{ padding: 20 }}
-        />
+      <View style={{ gap: 12 }}>
+        <Card
+          style={{
+            width: 180,
+            height: 180,
+            paddingHorizontal: 20,
+            paddingVertical: 20,
+            borderRadius: 24,
+          }}
+        >
+          <Image
+            source={require("public/core/icon.png")}
+            style={{ flex: 1, aspectRatio: 1, borderRadius: 24 }}
+          />
+        </Card>
         <Text
           style={{
             textAlign: "center",
             fontSize: 36,
-            width: "100%",
-            marginVertical: 12,
           }}
         >
           Tanuri
         </Text>
       </View>
 
-      <View style={{ display: "flex", gap: 12 }}>
+      <ScrollView
+        style={{
+          flex: 1,
+        }}
+        contentContainerStyle={{ paddingTop: 20, gap: 12 }}
+        keyboardShouldPersistTaps="handled"
+      >
         <Controller
           control={form.control}
           name="email"
@@ -132,15 +148,16 @@ const SignInScreen = () => {
         >
           Sign in
         </Button>
-      </View>
+      </ScrollView>
+      <AvoidKeyboard />
 
-      <Link href="/auth/sign-up" asChild style={{ marginTop: "auto" }}>
-        <Text style={{ textDecorationLine: "none" }}>
+      <Link href="/auth/sign-up" asChild>
+        <Text style={{ textDecorationLine: "none", textAlign: "center" }}>
           Don't have an account?{" "}
           <Text style={{ fontWeight: "bold" }}>Sign up</Text>
         </Text>
       </Link>
-    </View>
+    </SafeAreaView>
   );
 };
 
