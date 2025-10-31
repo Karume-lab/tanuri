@@ -10,6 +10,12 @@ class CategoryModel(models.Model):
         blank=True,
         help_text="Lucide icon name for this category. You can obtain a name from https://lucide.dev/icons/",
     )
+    image = models.ImageField(
+         upload_to="category-images/", 
+         null=True, 
+         blank=True,
+         help_text="Category image"
+     )
 
     def __str__(self):
         return self.name

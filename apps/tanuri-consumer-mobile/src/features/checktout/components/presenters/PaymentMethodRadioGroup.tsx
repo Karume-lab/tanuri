@@ -1,5 +1,4 @@
 import { Phone } from "lucide-react-native";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup } from "@/components/ui/radio";
@@ -7,8 +6,15 @@ import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { textStyles } from "@/styles/text";
 
-const PaymentMethodRadioGroup = () => {
-  const [value, setValue] = useState("option1");
+interface PaymentMethodRadioGroupProps {
+  value: "cash" | "mpesa";
+  setValue: React.Dispatch<React.SetStateAction<"cash" | "mpesa">>;
+}
+
+const PaymentMethodRadioGroup: React.FC<PaymentMethodRadioGroupProps> = ({
+  value,
+  setValue,
+}) => {
   return (
     <RadioGroup
       labelStyle={{
@@ -18,7 +24,7 @@ const PaymentMethodRadioGroup = () => {
       options={[
         {
           label: "Cash on Delivery",
-          value: "option1",
+          value: "cash",
           children: (
             <Text style={[textStyles.small]}>
               Pay when the order arrives at your dorstep
@@ -27,13 +33,13 @@ const PaymentMethodRadioGroup = () => {
         },
         {
           label: "Pay Now via Mpesa",
-          value: "option2",
+          value: "mpesa",
           children: (
             <View>
               <Text style={[textStyles.small]}>
                 Receive a payment prompt on your phone number
               </Text>
-              {value === "option2" && (
+              {value === "mpesa" && (
                 <View
                   style={{
                     flexDirection: "row",

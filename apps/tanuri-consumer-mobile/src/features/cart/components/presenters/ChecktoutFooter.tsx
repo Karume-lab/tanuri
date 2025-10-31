@@ -10,11 +10,13 @@ import { useCartStore } from "../../store";
 interface ChecktoutFooterProps {
   buttonText: string;
   onButtonPress: () => void;
+  loading?: boolean;
 }
 
 const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({
   buttonText,
   onButtonPress,
+  loading = false,
 }) => {
   const { totalCost: subTotal } = useCartStore();
   return (
@@ -40,6 +42,7 @@ const ChecktoutFooter: React.FC<ChecktoutFooterProps> = ({
             textTransform: "capitalize",
           }}
           onPress={onButtonPress}
+          loading={loading}
         >
           {buttonText}
         </Button>
