@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+import dj_database_url
 
 import environ
 
@@ -84,13 +85,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-# TODO: change this to postgres
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if not env("DATABASE_URL"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
     }
-}
+else:
+    DATABASES = {
+        "default": dj_database_url.parse(env("DATABASE_URL")),
+    }
 
 
 # Password validation
@@ -127,8 +132,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+# For development (served automatically by Django)
+STATIC_URL = '/static/'
 
+# For production (collected static files)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Optional: where Django looks for extra static files (your custom folders)
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 # File upload files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -178,3 +191,5 @@ DJOSER = {
 
 
 AUTH_USER_MODEL = "users.UserModel"
+
+
