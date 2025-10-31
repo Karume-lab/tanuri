@@ -29,6 +29,8 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=tuple)
 
+CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=tuple)
+
 # Application definition
 THIRD_PARTY_APPS = [
     "django.contrib.admin",
