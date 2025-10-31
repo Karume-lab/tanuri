@@ -61,7 +61,16 @@ const ProfileScreenContainer = () => {
           <Text style={[textStyles.medium]}>More</Text>
         </View>
         <Separator style={{ marginTop: 16 }} />
-        <ProfileLink text="About loyalty points" onPress={() => {}} />
+        <ProfileLink
+          text="About Tanuri"
+          onPress={() => router.push("/(screens)/(protected)/about-tanuri")}
+        />
+        <ProfileLink
+          text="About loyalty points"
+          onPress={() =>
+            router.push("/(screens)/(protected)/about-loyalty-points")
+          }
+        />
         <ProfileLink text="Sign out" onPress={clearSession} asLink />
       </View>
     </View>
