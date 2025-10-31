@@ -57,7 +57,7 @@ const AboutTanuriScreen = () => {
           <View style={styles.qrContainer}>
             <QrCode color="#60A5FA" size={24} style={styles.icon} />
             <QRCode
-              value="https://tanuri.vercel.app"
+              value="https://tanuri.vercel.app/tanuri.apk"
               size={140}
               backgroundColor="#0B0B0F"
               color="#E5E7EB"
