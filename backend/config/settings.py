@@ -127,8 +127,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+# For development (served automatically by Django)
+STATIC_URL = '/static/'
 
+# For production (collected static files)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Optional: where Django looks for extra static files (your custom folders)
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 # File upload files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -178,3 +186,5 @@ DJOSER = {
 
 
 AUTH_USER_MODEL = "users.UserModel"
+
+
