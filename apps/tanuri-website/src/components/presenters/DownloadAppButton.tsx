@@ -34,7 +34,23 @@ const DownloadAppButton = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <ul className="list-disc ml-5 space-y-2 text-sm">
+        <div className="bg-muted/40 p-3 rounded-lg border text-sm mt-2">
+          <p className="font-medium mb-1">Guest Account (Recommended)</p>
+          <p>
+            If you want an account that already has sample data to make
+            exploring easier, use this instead of signing up for a new one:
+          </p>
+          <div className="mt-2 space-y-1">
+            <p>
+              Email: <span className="font-mono">customer@mail.com</span>
+            </p>
+            <p>
+              Password: <span className="font-mono">hello</span>
+            </p>
+          </div>
+        </div>
+
+        <ul className="list-disc ml-5 space-y-2 text-sm mt-4">
           <li>Tap the download button below</li>
           <li>Allow your browser to download the file</li>
           <li>Open the APK from your notifications</li>
