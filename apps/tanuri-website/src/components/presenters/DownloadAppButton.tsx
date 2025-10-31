@@ -29,7 +29,7 @@ const DownloadAppButton = () => {
             yet on the Play Store, you must enable installation from unknown
             sources.
             <br />
-            <br />📌 iPhone (iOS) not supported yet — App Store version coming
+            <br />📌 iPhone (iOS) not supported yet - App Store version coming
             soon!
           </DialogDescription>
         </DialogHeader>

@@ -27,7 +27,7 @@ export const TEAM_MEMBERS = [
     id: crypto.randomUUID(),
     imageUrl: "/karume.png",
     name: "Daniel Karume",
-    role: "Developer — Backend, Mobile, Frontend",
+    role: "Developer - Backend, Mobile, Frontend",
     description:
       "Full-stack engineer building secure backend systems, smooth mobile apps, and high-performance web experiences. Led initial setup, backend and landing page development, mobile integration, and monorepo configuration.",
     socials: [
@@ -49,7 +49,7 @@ export const TEAM_MEMBERS = [
     id: crypto.randomUUID(),
     imageUrl: "/joseph.png",
     name: "Joseph Ngure",
-    role: "Developer — Mobile",
+    role: "Developer - Mobile",
     description:
       "Crafts intuitive and reliable mobile applications with a strong focus on performance and user experience.",
     socials: [

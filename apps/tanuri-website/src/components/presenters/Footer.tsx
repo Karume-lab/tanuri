@@ -12,7 +12,7 @@ const Footer = () => {
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
             Order cooking gas with speed, safety, and convenience. Smart
-            delivery, secure payments, and real-time tracking — Tanuri keeps
+            delivery, secure payments, and real-time tracking - Tanuri keeps
             your home running.
           </p>
         </section>

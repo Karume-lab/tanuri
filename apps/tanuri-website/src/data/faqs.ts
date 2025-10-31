@@ -2,7 +2,7 @@ export const FAQS = [
   {
     question: "What is Tanuri?",
     answer:
-      "Tanuri is a mobile app that allows you to order cooking gas quickly and securely from trusted distributors near you — with real-time delivery tracking.",
+      "Tanuri is a mobile app that allows you to order cooking gas quickly and securely from trusted distributors near you - with real-time delivery tracking.",
   },
   {
     question: "How do I place a gas order?",
