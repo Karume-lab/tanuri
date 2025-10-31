@@ -44,8 +44,8 @@ const ProductCategoryCard: React.FC<ProductCategoryCardProps> = ({
             source={imageUrl}
           />
           <Text
-            numberOfLines={1}
-            ellipsizeMode="clip"
+            numberOfLines={2}
+            ellipsizeMode="tail"
             style={[
               textStyles.smMedium,
               {

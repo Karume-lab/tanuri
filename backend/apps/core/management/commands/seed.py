@@ -110,11 +110,53 @@ class Command(BaseCommand):
         # CATEGORIES
         # ---------------------------------------------------------------------
         self.log("\n📦 Creating categories...", "STEP")
+
+        # Load category images
+        category_images_dir = os.path.join(
+            settings.BASE_DIR, "apps", "catalog", "mock", "images", "categories"
+        )
+        
+        category_image_mapping = {
+            "Gas": "cylinders-removebg-preview.png",
+            "Accessories": "burners-removebg-preview.png", 
+            "Appliances": "regulator-removebg-preview.png",
+        }
+
         categories = [
             ("Gas Cylinders", "flame"),
             ("Burners & Accessories", "wrench"),
             ("Appliances", "oven"),
         ]
+        
+        for name, icon in categories:
+            category, created = CategoryModel.objects.get_or_create(
+                name=name, 
+                defaults={"icon": icon}
+            )
+            
+            if created:
+                self.log(f"✅ Category created: {name}")
+            else:
+                self.log(f"⚠️ Category exists, skipping: {name}", "SKIP")
+                
+            # Add category image if it exists and category doesn't have one
+            if name in category_image_mapping and not category.image:
+                image_filename = category_image_mapping[name]
+                image_path = os.path.join(category_images_dir, image_filename)
+                
+                if os.path.exists(image_path):
+                    with open(image_path, "rb") as img_file:
+                        category.image.save(
+                            image_filename,
+                            File(img_file, name=image_filename),
+                            save=True
+                        )
+                    self.log(f"    🖼️ Category image added: {image_filename}")
+                else:
+                    self.log(f"    ⚠️ Category image not found: {image_path}", "WARNING")
+            elif category.image:
+                self.log(f"    ⚠️ Category image already exists for {name}", "SKIP")
+
         category_objs = []
         for name, icon in categories:
             cat, created = CategoryModel.objects.get_or_create(name=name, icon=icon)

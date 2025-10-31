@@ -13,7 +13,7 @@ const ProductCategoriesListingLayout = () => {
     (category) => ({
       categoryId: category.id,
       categoryName: category.name,
-      imageUrl: category.icon,
+      imageUrl: category.image,
     }),
   );
   return (

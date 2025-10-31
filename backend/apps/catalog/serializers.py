@@ -11,7 +11,7 @@ from rest_framework import serializers
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CategoryModel
-        fields = ("url", "id", "name", "icon")
+        fields = ("url", "id", "name", "icon", "image")
         extra_kwargs = {"url": {"view_name": "category-detail"}}
 
 
