@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+import dj_database_url
 
 import environ
 
@@ -84,13 +85,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-# TODO: change this to postgres
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if not env("DATABASE_URL"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
     }
-}
+else:
+    DATABASES = {
+        "default": dj_database_url.parse(env("DATABASE_URL")),
+    }
 
 
 # Password validation
