@@ -29,7 +29,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=tuple)
 
-CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=tuple)
+CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", cast=tuple, default=())
 
 # Application definition
 THIRD_PARTY_APPS = [
@@ -87,7 +87,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-if not env("DATABASE_URL"):
+if not env("DATABASE_URL", default=None):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -135,14 +135,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # For development (served automatically by Django)
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # For production (collected static files)
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Optional: where Django looks for extra static files (your custom folders)
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
 # File upload files
 MEDIA_URL = "/media/"
@@ -193,5 +193,3 @@ DJOSER = {
 
 
 AUTH_USER_MODEL = "users.UserModel"
-
-
