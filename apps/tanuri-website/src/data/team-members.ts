@@ -33,7 +33,7 @@ export const TEAM_MEMBERS = [
     socials: [
       {
         Icon: Github,
-        href: "https://github.com/quadroli/",
+        href: "https://github.com/Karume-lab/",
       },
       {
         Icon: Linkedin,

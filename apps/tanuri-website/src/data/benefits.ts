@@ -1,4 +1,4 @@
-import { Clock, Flame, Gift, RefreshCw, Truck, Wallet } from "lucide-react";
+import { CreditCard, Flame, Package, ShoppingCart } from "lucide-react";
 
 export const BENEFITS = [
   {
@@ -8,33 +8,21 @@ export const BENEFITS = [
       "Order LPG cylinders in just a few taps — no calls, no waiting. Designed for simplicity and speed.",
   },
   {
-    icon: Wallet,
-    title: "Seamless Mobile Payments",
+    icon: Package,
+    title: "Browse Products",
     description:
-      "Integrated with SasaPay and mobile money for instant, secure STK push payments or cash options.",
+      "Explore a variety of gas sizes and accessories from trusted suppliers — compare and pick what fits your needs.",
   },
   {
-    icon: Truck,
-    title: "Reliable Delivery Tracking",
+    icon: ShoppingCart,
+    title: "Smart Cart Management",
     description:
-      "Track your order in real-time from confirmation to delivery at your doorstep.",
+      "Add, update, or remove products easily before checkout. Your cart stays in sync for a smoother shopping experience.",
   },
   {
-    icon: Gift,
-    title: "Loyalty Points & Rewards",
+    icon: CreditCard,
+    title: "Secure Payments",
     description:
-      "Earn points for every refill and redeem them on future orders — a smarter way to save.",
-  },
-  {
-    icon: Clock,
-    title: "Smart Refill Reminders",
-    description:
-      "Set how long your gas lasts, and Tanuri will remind you before it runs out — never get caught empty.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Simple Refunds & Cancellations",
-    description:
-      "Change your mind? Cancel orders easily and receive refunds automatically via escrow.",
+      "Pay with confidence — seamless integration with secure payment gateways for safe and fast transactions.",
   },
 ];
