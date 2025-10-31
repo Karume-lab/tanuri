@@ -6,6 +6,15 @@ import { textStyles } from "@/styles/text";
 
 const Greeter = () => {
   const { session } = useSession();
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+
+    if (hour < 12) return "Good morning";
+    if (hour < 18) return "Good afternoon";
+    return "Good evening";
+  };
+
   return (
     <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
       <Avatar
@@ -21,8 +30,11 @@ const Greeter = () => {
         />
         <AvatarFallback>AB</AvatarFallback>
       </Avatar>
+
       <View>
-        <Text style={[textStyles.medium]}>Good morning!{session?.email}</Text>
+        <Text style={[textStyles.medium]}>
+          {getGreeting()}! {session?.email ?? ""}
+        </Text>
         <Text style={[textStyles.small]} variant="caption">
           69 loyalty points
         </Text>

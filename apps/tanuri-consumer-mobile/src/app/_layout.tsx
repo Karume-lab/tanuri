@@ -1,13 +1,17 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ThemeProvider } from "@/styles/theme/theme-provider";
-import "react-native-reanimated";
 import { setBackgroundColorAsync } from "expo-system-ui";
 import { useEffect } from "react";
-import { InitializeAppContainer, ProvidersContainer } from "@/components";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  InitializeAppContainer,
+  ProvidersContainer,
+  SlowRequestsAlert,
+} from "@/components";
 import { useSession } from "@/features/auth";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { ThemeProvider } from "@/styles/theme/theme-provider";
+import "react-native-reanimated";
 
 const RootLayout = () => {
   const { isAuthenticated, isOnboarded } = useSession();
@@ -21,6 +25,7 @@ const RootLayout = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <SlowRequestsAlert />
       <InitializeAppContainer>
         <ThemeProvider>
           <ProvidersContainer>
