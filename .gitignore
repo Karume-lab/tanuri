@@ -30,3 +30,4 @@ venv
 __pycache__
 db.*
 media/
+staticfiles/
