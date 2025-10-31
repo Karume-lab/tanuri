@@ -4,7 +4,10 @@ const AUTH_API_PREFIX_URL = `${process.env.EXPO_PUBLIC_BASE_API_URL}/auth/`;
 
 const baseApi = ky.create({
   prefixUrl: process.env.EXPO_PUBLIC_BASE_API_URL,
-  timeout: 10000,
+  timeout: false,
+  retry: {
+    limit: 5,
+  },
 });
 
 export const publicApi = baseApi.extend({});
